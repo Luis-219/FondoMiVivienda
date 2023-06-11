@@ -58,5 +58,19 @@
     text-transform: uppercase;
     background-color: #255000;
     color: #ffff8b;
-    
+}
+.display{
+    display: flex;
+    flex-direction: row;
+}
+
+.config{
+    padding-left: 25px;
+}
+.radio{
+    margin-top: 10px;
+    margin-left: 25px;
+}
+.btnrad{
+    margin-left: 20px;
 }

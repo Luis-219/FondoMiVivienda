@@ -6,15 +6,47 @@
         <div class="right">
             <h1 class="title">Nueva Cotización</h1>
             <div class="options">
-                <h3>Tipo de tasa</h3>
-                <h3>Capitalización</h3>
-                <h3>Periodo de gracia</h3>
-                <h3>Moneda</h3>
+                <form [formGroup]="myForm" autocomplete="off">
+                    
+                    <div class="display">
+                        <h3>Tipo de tasa: </h3>
+                        <mat-radio-group class="radio">
+                            <mat-radio-button class="btnrad" color="primary" value="nominal" (change)="checkradio($event)">Tasa Nominal</mat-radio-button>
+                            <mat-radio-button class="btnrad" color="primary" value="efectiva" (change)="checkradio($event)">Tasa Efectiva</mat-radio-button>
+                        </mat-radio-group>
+                    </div>
 
-                <h2>O usar <span>configuración favorita</span></h2>
+                    <div class="display">
+                        <h3>Capitalización: </h3>
+                        <mat-form-field class="config">
+                            <mat-select formControlName="capital">
+                                <mat-option *ngFor="let cap of caps" [value]="cap">{{cap}}</mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+
+                    <div class="display">
+                        <h3>Periodo de gracia: </h3>
+                        <mat-form-field class="config">
+                            <mat-select formControlName="gracia">
+                                <mat-option *ngFor="let gracia of gracias" [value]="gracia">{{gracia}}</mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+                    
+                    <div class="display">
+                        <h3>Moneda: </h3>
+                        <mat-radio-group class="radio">
+                            <mat-radio-button class="btnrad" color="primary" value="soles" (change)="checkmoneda($event)">Soles</mat-radio-button>
+                            <mat-radio-button class="btnrad" color="primary" value="dolares" (change)="checkmoneda($event)">Dolares</mat-radio-button>
+                        </mat-radio-group>
+                    </div>
+    
+                    <h2>O usar <span>configuración favorita</span></h2>
+                </form>
             </div>
             <div class="actions">
-                <button mat-raised-button>Continuar</button>
+                <button mat-raised-button (click)="continue()" >Continuar</button>
             </div>
         </div>
     </div>
