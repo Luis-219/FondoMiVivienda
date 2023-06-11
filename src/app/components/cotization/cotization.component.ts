@@ -1,8 +1,11 @@
+import { Configfav } from './../../models/Configfav';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Client } from 'src/app/models/Client';
 import { ClientService } from 'src/app/services/client.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { ConfigurationService } from 'src/app/services/configuration.service';
 
 @Component({
   selector: 'app-cotization',
@@ -24,7 +27,9 @@ export class CotizationComponent implements OnInit {
   constructor(private clientservice: ClientService,
               private activatedRouter:ActivatedRoute,
               private route: Router,
-              private formBuilder:FormBuilder) { }
+              private formBuilder:FormBuilder,
+              private snackBar: MatSnackBar,
+              private configfavservice: ConfigurationService) { }
 
   ngOnInit(): void {
     this.id= this.activatedRouter.snapshot.params["id"];
@@ -54,19 +59,47 @@ export class CotizationComponent implements OnInit {
     console.log(this.moneda);
   }
 
+
+  exist?:Configfav;
+  save(){
+
+    const configfav:Configfav = {
+      id:0,
+      idclient: this.usernow.id,
+      tasa: this.tipotasa,
+      capitalizacion: this.myForm.get('capital')!.value,
+      periodgracia: this.myForm.get('gracia')!.value,
+      moneda: this.moneda
+    };
+
+    this.configfavservice.getconfigbyid(configfav.idclient).subscribe({
+      next:(data)=>{
+        this.exist = data;
+      }
+    })
+    if(this.exist != undefined){
+      if( this.myForm.valid ){
+        this.configfavservice.addconfig(configfav).subscribe({
+          next: (data)=>{
+            this.snackBar.open("Se añadió la config como favorita", 'OK', {
+              duration: 2000 });
+          }
+        });
+      }else{
+        this.snackBar.open("Debe completar los campos requeridos", '',{
+          duration: 3000});
+      }
+    }
+    else{
+      this.snackBar.open("Ya tiene una configuración favorita", '',{
+        duration: 3000});
+    }
+    
+
+    
+  }
+
   continue(){
-
-
-    let tasa = this.tipotasa;
-    let capital = this.myForm.get('capital')!.value;
-    let gracia = this.myForm.get('gracia')!.value;
-    let moneda = this.moneda;
-    console.log(2);
-    console.log(tasa);
-    console.log(capital);
-    console.log(gracia);
-    console.log(moneda);
-
 
   }
 

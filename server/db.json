@@ -39,5 +39,15 @@
       "rooms": 4,
       "pricedollar": 53000
     }
+  ],
+  "configfavs": [
+    {
+      "id": 1,
+      "idclient": 1,
+      "tasa": "nominal",
+      "capitalizacion": "Trimestral",
+      "periodgracia": "Total",
+      "moneda": "dolares"
+    }
   ]
 }
