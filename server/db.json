@@ -1,0 +1,43 @@
+{
+  "clients": [
+    {
+      "id": 1,
+      "email": "Juan@gmail.com",
+      "password": "12345",
+      "name": "Juan",
+      "lastname": "Lopez",
+      "phone": "123456789",
+      "dni": "75839212",
+      "address": "Polo norte"
+    },
+    {
+      "id": 2,
+      "email": "Maria@gmail.com",
+      "password": "12345",
+      "name": "Maria",
+      "lastname": "Maria",
+      "phone": "adad",
+      "dni": "adad",
+      "address": "adda"
+    },
+    {
+      "id": 3,
+      "email": "adad",
+      "password": "adad",
+      "name": "adad",
+      "lastname": "adad",
+      "phone": "adad",
+      "dni": "adad",
+      "address": "adda"
+    }
+  ],
+  "properties": [
+    {
+      "id": 1,
+      "address": "Polo Sur",
+      "size": "320 m2",
+      "rooms": 4,
+      "pricedollar": 53000
+    }
+  ]
+}

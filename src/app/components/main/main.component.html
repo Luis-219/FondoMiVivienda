@@ -1,0 +1,18 @@
+<body>
+    <div class="all">
+        <div class="left">
+            <app-navbar [id] = "id" [mode] = "1"></app-navbar>
+        </div>
+        <div class="right">
+           <div class="top">
+                <h1 class="title">Inicio</h1>
+                <h3 class="subtitle"> N° Cotizaciones realizadas: Proximamente.</h3>
+                <h3 class="subtitle">Últimas Cotizaciones: Proximamente.</h3>
+           </div>
+           <div class="bottom">
+                <button mat-raised-button routerLink="/new-quotation/{{id}}">Nueva Cotización</button>
+                <button mat-raised-button>Mis Cotizaciones</button>
+           </div>
+        </div>
+    </div>
+</body>
