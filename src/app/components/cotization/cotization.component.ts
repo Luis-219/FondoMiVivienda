@@ -31,10 +31,14 @@ export class CotizationComponent implements OnInit {
               private route: Router,
               private formBuilder:FormBuilder,
               private snackBar: MatSnackBar,
-              private configservice: ConfigurationService) { }
+              private configservice: ConfigurationService,
+              private router:Router) { }
 
   ngOnInit(): void {
-    this.id= this.activatedRouter.snapshot.params["id"];
+    const iduser = this.activatedRouter.snapshot.queryParamMap.get('iduser');
+    console.log()
+    this.id = Number(iduser);
+    console.log(this.id);
     this.loadUser();
     this.loadform();
   }
@@ -142,13 +146,20 @@ export class CotizationComponent implements OnInit {
 
     this.configservice.addQuot(quotation).subscribe({
       next:(data) =>{
+        this.router.navigate(
+          ['/params-quotation'],
+          {
+            queryParams: { idquot: data.id, idconfig: data.idconfigquot, iduser: data.idclient}}
+          );
       }
     });
   }
 
+
   usernow!:Client;
   loadUser()
   {
+    console.log(this.id);
     if(this.id!= undefined && this.id!= 0)
     {
       this.clientservice.getClientByID(this.id).subscribe(

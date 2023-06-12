@@ -46,7 +46,8 @@ export class LoginComponent implements OnInit {
         if(user){
           this.snackbar.open("Ingresó correctamente.",'OK', {
             duration: 3000});
-          this.route.navigate(['/main', user.id]);
+          this.route.navigate(['/main'], {
+            queryParams: { iduser: user.id}});
         }else{
           this.snackbar.open("El correo o la contraseña son incorrectos",'OK', {
             duration: 3000});

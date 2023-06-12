@@ -7,14 +7,16 @@ import { EmptyhomeComponent } from './components/emptyhome/emptyhome.component';
 import { SigninComponent } from './components/signin/signin.component';
 import { MainComponent } from './components/main/main.component';
 import { CotizationComponent } from './components/cotization/cotization.component';
+import { ParamsmenuComponent } from './components/paramsmenu/paramsmenu.component';
 
 const routes: Routes = [
   {path: "", component:EmptyhomeComponent},
   {path: "home", component:EmptyhomeComponent},
   {path: "login", component:LoginComponent},
   {path: "signin", component:SigninComponent},
-  {path: "main/:id", component:MainComponent},
-  {path: "new-quotation/:id", component:CotizationComponent},
+  {path: "main", component:MainComponent},
+  {path: "new-quotation", component:CotizationComponent},
+  {path: "params-quotation", component:ParamsmenuComponent},
   {path: "**", component:Page404Component}
 ];
 

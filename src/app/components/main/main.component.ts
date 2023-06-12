@@ -16,7 +16,8 @@ export class MainComponent implements OnInit {
               private route: Router) { }
 
   ngOnInit(): void {
-    this.id= this.activatedRouter.snapshot.params["id"];
+    const iduser = this.activatedRouter.snapshot.queryParamMap.get('iduser');
+    this.id = Number(iduser);
     this.loadUser();
   }
 

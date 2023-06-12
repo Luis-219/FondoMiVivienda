@@ -67,7 +67,63 @@
     }
   ],
   "configquots": [
+    {
+      "id": 1,
+      "idclient": 1,
+      "tasa": "efectiva",
+      "capitalizacion": "Bimestral",
+      "periodgracia": "Parcial",
+      "moneda": "dolares"
+    },
+    {
+      "id": 2,
+      "idclient": 2,
+      "tasa": "nominal",
+      "capitalizacion": "Bimestral",
+      "periodgracia": "Parcial",
+      "moneda": "dolares"
+    },
+    {
+      "id": 3,
+      "idclient": 2,
+      "tasa": "nominal",
+      "capitalizacion": "Bimestral",
+      "periodgracia": "Parcial",
+      "moneda": "dolares"
+    },
+    {
+      "id": 4,
+      "idclient": 1,
+      "tasa": "efectiva",
+      "capitalizacion": "Bimestral",
+      "periodgracia": "Parcial",
+      "moneda": "dolares"
+    }
   ],
   "quotations": [
+    {
+      "id": 1,
+      "idclient": 1,
+      "idconfigquot": 1,
+      "amount": 0
+    },
+    {
+      "id": 2,
+      "idclient": 2,
+      "idconfigquot": 2,
+      "amount": 0
+    },
+    {
+      "id": 3,
+      "idclient": 2,
+      "idconfigquot": 3,
+      "amount": 0
+    },
+    {
+      "id": 4,
+      "idclient": 1,
+      "idconfigquot": 4,
+      "amount": 0
+    }
   ]
 }
