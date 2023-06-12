@@ -45,9 +45,29 @@
       "id": 1,
       "idclient": 1,
       "tasa": "nominal",
-      "capitalizacion": "Trimestral",
-      "periodgracia": "Total",
+      "capitalizacion": "Bimestral",
+      "periodgracia": "Parcial",
+      "moneda": "dolares"
+    },
+    {
+      "id": 2,
+      "idclient": 2,
+      "tasa": "nominal",
+      "capitalizacion": "Bimestral",
+      "periodgracia": "Parcial",
+      "moneda": "dolares"
+    },
+    {
+      "id": 3,
+      "idclient": 3,
+      "tasa": "nominal",
+      "capitalizacion": "Bimestral",
+      "periodgracia": "Parcial",
       "moneda": "dolares"
     }
+  ],
+  "configquots": [
+  ],
+  "quotations": [
   ]
 }

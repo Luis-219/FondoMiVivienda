@@ -6,6 +6,8 @@ import { Client } from 'src/app/models/Client';
 import { ClientService } from 'src/app/services/client.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ConfigurationService } from 'src/app/services/configuration.service';
+import { Configquot } from 'src/app/models/Configquot';
+import { Quotation } from 'src/app/models/Quotation';
 
 @Component({
   selector: 'app-cotization',
@@ -29,7 +31,7 @@ export class CotizationComponent implements OnInit {
               private route: Router,
               private formBuilder:FormBuilder,
               private snackBar: MatSnackBar,
-              private configfavservice: ConfigurationService) { }
+              private configservice: ConfigurationService) { }
 
   ngOnInit(): void {
     this.id= this.activatedRouter.snapshot.params["id"];
@@ -60,7 +62,19 @@ export class CotizationComponent implements OnInit {
   }
 
 
-  exist?:Configfav;
+  exist!: Configfav[];
+  loadconfig(){
+    this.configservice.getconfigbyid(this.usernow.id).subscribe({
+      next:(data)=>{
+        this.exist = data;
+        console.log(this.exist);
+        console.log(this.exist.length)
+      }
+    })
+  }
+
+
+
   save(){
 
     const configfav:Configfav = {
@@ -71,18 +85,13 @@ export class CotizationComponent implements OnInit {
       periodgracia: this.myForm.get('gracia')!.value,
       moneda: this.moneda
     };
-
-    this.configfavservice.getconfigbyid(configfav.idclient).subscribe({
-      next:(data)=>{
-        this.exist = data;
-      }
-    })
-    if(this.exist != undefined){
+    if(this.exist.length <= 0){
       if( this.myForm.valid ){
-        this.configfavservice.addconfig(configfav).subscribe({
+        this.configservice.addconfig(configfav).subscribe({
           next: (data)=>{
             this.snackBar.open("Se añadió la config como favorita", 'OK', {
               duration: 2000 });
+              this.exist.push(configfav);
           }
         });
       }else{
@@ -93,6 +102,7 @@ export class CotizationComponent implements OnInit {
     else{
       this.snackBar.open("Ya tiene una configuración favorita", '',{
         duration: 3000});
+      console.log(this.exist);
     }
     
 
@@ -101,11 +111,40 @@ export class CotizationComponent implements OnInit {
 
   continue(){
 
+    const configquot:Configquot = {
+      id:0,
+      idclient: this.usernow.id,
+      tasa: this.tipotasa,
+      capitalizacion: this.myForm.get('capital')!.value,
+      periodgracia: this.myForm.get('gracia')!.value,
+      moneda: this.moneda
+    };
+
+    if( this.myForm.valid ){
+      this.configservice.addconfigquot(configquot).subscribe({
+        next: (data)=>{
+          this.snackBar.open("Cotización generada", "OK");
+          this.generateQuot(data.id);
+        }
+      });
+    }else{
+      this.snackBar.open("Debe completar los campos requeridos");
+    }
   }
 
+  generateQuot(idconfig: number){
+    const quotation:Quotation = {
+      id: 0,
+      idclient: this.usernow.id,
+      idconfigquot: idconfig,
+      amount: 0
+    };
 
-
-
+    this.configservice.addQuot(quotation).subscribe({
+      next:(data) =>{
+      }
+    });
+  }
 
   usernow!:Client;
   loadUser()
@@ -115,7 +154,8 @@ export class CotizationComponent implements OnInit {
       this.clientservice.getClientByID(this.id).subscribe(
         (data:Client)=>{
           this.usernow = data;
-          console.log("name: " + this.usernow.id);
+          console.log("name: " + this.usernow.name);
+          this.loadconfig();
         }
       );
     }

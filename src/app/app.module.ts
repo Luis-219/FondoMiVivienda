@@ -15,6 +15,7 @@ import { SigninComponent } from './components/signin/signin.component';
 import { MainComponent } from './components/main/main.component';
 import { CotizationComponent } from './components/cotization/cotization.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
+import { ParamsmenuComponent } from './components/paramsmenu/paramsmenu.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { NavbarComponent } from './components/navbar/navbar.component';
     SigninComponent,
     MainComponent,
     CotizationComponent,
-    NavbarComponent
+    NavbarComponent,
+    ParamsmenuComponent
   ],
   imports: [
     BrowserModule,
