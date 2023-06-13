@@ -34,10 +34,21 @@
   "properties": [
     {
       "id": 1,
+      "name": "Polo",
+      "district": "Sur",
       "address": "Polo Sur",
       "size": "320 m2",
       "rooms": 4,
       "pricedollar": 53000
+    },
+    {
+      "id": 2,
+      "name": "Los pinos",
+      "district": "Surco",
+      "address": "Primavera av.",
+      "size": "450 m2",
+      "rooms": 5,
+      "pricedollar": 100000
     }
   ],
   "configfavs": [
@@ -98,6 +109,54 @@
       "capitalizacion": "Bimestral",
       "periodgracia": "Parcial",
       "moneda": "dolares"
+    },
+    {
+      "id": 5,
+      "idclient": 1,
+      "tasa": "nominal",
+      "capitalizacion": "Trimestral",
+      "periodgracia": "Parcial",
+      "moneda": "dolares"
+    },
+    {
+      "id": 6,
+      "idclient": 1,
+      "tasa": "nominal",
+      "capitalizacion": "Bimestral",
+      "periodgracia": "Parcial",
+      "moneda": "dolares"
+    },
+    {
+      "id": 7,
+      "idclient": 1,
+      "tasa": "nominal",
+      "capitalizacion": "Bimestral",
+      "periodgracia": "Parcial",
+      "moneda": "dolares"
+    },
+    {
+      "id": 8,
+      "idclient": 1,
+      "tasa": "nominal",
+      "capitalizacion": "Mensual",
+      "periodgracia": "Parcial",
+      "moneda": "dolares"
+    },
+    {
+      "id": 9,
+      "idclient": 1,
+      "tasa": "nominal",
+      "capitalizacion": "Bimestral",
+      "periodgracia": "Parcial",
+      "moneda": "dolares"
+    },
+    {
+      "id": 10,
+      "idclient": 1,
+      "tasa": "nominal",
+      "capitalizacion": "Bimestral",
+      "periodgracia": "Parcial",
+      "moneda": "dolares"
     }
   ],
   "quotations": [
@@ -123,6 +182,42 @@
       "id": 4,
       "idclient": 1,
       "idconfigquot": 4,
+      "amount": 0
+    },
+    {
+      "id": 5,
+      "idclient": 1,
+      "idconfigquot": 5,
+      "amount": 0
+    },
+    {
+      "id": 6,
+      "idclient": 1,
+      "idconfigquot": 6,
+      "amount": 0
+    },
+    {
+      "id": 7,
+      "idclient": 1,
+      "idconfigquot": 7,
+      "amount": 0
+    },
+    {
+      "id": 8,
+      "idclient": 1,
+      "idconfigquot": 8,
+      "amount": 0
+    },
+    {
+      "id": 9,
+      "idclient": 1,
+      "idconfigquot": 9,
+      "amount": 0
+    },
+    {
+      "id": 10,
+      "idclient": 1,
+      "idconfigquot": 10,
       "amount": 0
     }
   ]

@@ -1,4 +1,6 @@
+import { MatCheckboxChange, MatCheckboxModule } from '@angular/material/checkbox';
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Route, Router } from '@angular/router';
 import { Client } from 'src/app/models/Client';
 import { ClientService } from 'src/app/services/client.service';
@@ -14,9 +16,13 @@ export class ParamsmenuComponent implements OnInit {
   idconfig!: number;
   iduser!: number;
 
+  myForm!: FormGroup;
+
+
   constructor(private route: ActivatedRoute,
               private clientservice: ClientService,
-              private router: Router) { }
+              private router: Router,
+              private formbuilder: FormBuilder) { }
 
   ngOnInit(): void {
     const quot = this.route.snapshot.queryParamMap.get('idquot');
@@ -26,8 +32,18 @@ export class ParamsmenuComponent implements OnInit {
     this.idquot = Number(quot);
     this.idconfig = Number(config);
     this.iduser = Number(user);
-
     this.loadUser();
+    this.loadform();
+  }
+
+  loadform(){
+    this.myForm = this.formbuilder.group(
+      {
+        amount:[""],
+        period:[""],
+        tax: [""]
+      }
+    )
   }
 
   usernow!:Client;
@@ -42,6 +58,23 @@ export class ParamsmenuComponent implements OnInit {
         }
       );
     }
+  }
+
+  inicial = false;
+
+  checkInicial(event: MatCheckboxChange){
+    console.log(this.inicial);
+    if(event.checked){
+      this.inicial = true;
+      console.log(this.inicial);
+    }
+    else{
+      this.inicial = false;
+      console.log(this.inicial);
+    }
+
+
+
   }
   
 

@@ -147,7 +147,7 @@ export class CotizationComponent implements OnInit {
     this.configservice.addQuot(quotation).subscribe({
       next:(data) =>{
         this.router.navigate(
-          ['/params-quotation'],
+          ['/select-properties'],
           {
             queryParams: { idquot: data.id, idconfig: data.idconfigquot, iduser: data.idclient}}
           );

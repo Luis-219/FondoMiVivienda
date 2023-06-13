@@ -8,6 +8,7 @@ import { SigninComponent } from './components/signin/signin.component';
 import { MainComponent } from './components/main/main.component';
 import { CotizationComponent } from './components/cotization/cotization.component';
 import { ParamsmenuComponent } from './components/paramsmenu/paramsmenu.component';
+import { SelectpropertiesComponent } from './components/selectproperties/selectproperties.component';
 
 const routes: Routes = [
   {path: "", component:EmptyhomeComponent},
@@ -17,6 +18,7 @@ const routes: Routes = [
   {path: "main", component:MainComponent},
   {path: "new-quotation", component:CotizationComponent},
   {path: "params-quotation", component:ParamsmenuComponent},
+  {path: "select-properties", component:SelectpropertiesComponent},
   {path: "**", component:Page404Component}
 ];
 

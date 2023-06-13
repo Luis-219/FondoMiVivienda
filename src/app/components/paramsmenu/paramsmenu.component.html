@@ -1,10 +1,28 @@
 <body>
     <div class="all">
         <div class="left">
-            <app-navbar [id] = "iduser" [mode] = "1"></app-navbar>
+            <app-navbar [id] = "iduser" [mode] = "2"></app-navbar>
         </div>
         <div class="right">
-            <div>Inmuebles</div>
+            <div class="title">Selección de Inmuebles</div>
+            <form [formGroup]="myForm" autocomplete="off">  
+                <mat-form-field appearance="legacy">
+                    <mat-label>Monto</mat-label>
+                    <input matInput formControlName="amount" placeholder="Monto">
+                </mat-form-field> <br>
+            
+                <mat-form-field appearance="legacy">
+                    <mat-label>Periodo</mat-label>
+                    <input matInput formControlName="period" placeholder="Periodo">
+                </mat-form-field> <br>
+
+                <mat-form-field appearance="legacy">
+                    <mat-label>Tasa</mat-label>
+                    <input matInput formControlName="tax" placeholder="Tasa">
+                </mat-form-field> <br>
+
+                <mat-checkbox class="check" color="primary" (change)="checkInicial($event)">Cuota Inicial</mat-checkbox>
+            </form>
         </div>
     </div>
 </body>
