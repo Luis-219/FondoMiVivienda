@@ -3,10 +3,10 @@
 }
 .welcome h1{
     padding: 10% 5% 5% 10%;
-    color: #ffff8b;
+    color: #2d2d2d;
     font-family: "Raleway", sans-serif;
     font-weight: 800;
-    font-size: 40px;
+    font-size: 30px;
 }
 .actions{
     height: 50%;
@@ -16,8 +16,8 @@
     padding-right: 10%;
 }
 .actions button{
-    background-color: #ffff8b;
-    color: #255000;
+    background-color: #ffffff;
+    color: #2d2d2d;
     margin-bottom: 10%;
     padding: 10px;
     text-transform: uppercase;
