@@ -141,7 +141,12 @@ export class CotizationComponent implements OnInit {
       id: 0,
       idclient: this.usernow.id,
       idconfigquot: idconfig,
-      amount: 0
+      amount: 0,
+      idprop: 0,
+      period: 0,
+      tax: 0,
+      fee: 0,
+      initial: false
     };
 
     this.configservice.addQuot(quotation).subscribe({

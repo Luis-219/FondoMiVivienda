@@ -9,6 +9,7 @@ import { MainComponent } from './components/main/main.component';
 import { CotizationComponent } from './components/cotization/cotization.component';
 import { ParamsmenuComponent } from './components/paramsmenu/paramsmenu.component';
 import { SelectpropertiesComponent } from './components/selectproperties/selectproperties.component';
+import { PaymentsComponent } from './components/payments/payments.component';
 
 const routes: Routes = [
   {path: "", component:EmptyhomeComponent},
@@ -19,6 +20,7 @@ const routes: Routes = [
   {path: "new-quotation", component:CotizationComponent},
   {path: "params-quotation", component:ParamsmenuComponent},
   {path: "select-properties", component:SelectpropertiesComponent},
+  {path: "payments-periods", component:PaymentsComponent},
   {path: "**", component:Page404Component}
 ];
 

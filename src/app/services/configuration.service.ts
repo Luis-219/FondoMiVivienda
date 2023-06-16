@@ -20,6 +20,10 @@ export class ConfigurationService {
   {
     return this.http.get<Configfav[]>("http://localhost:3000/configfavs/?idclient=" + id.toString());
   }
+  getconfigquotbyid(id: number)
+  {
+    return this.http.get<Configquot>("http://localhost:3000/configquots/" + id.toString());
+  }
 
   addconfigquot(config: Configquot)
   {
@@ -29,6 +33,16 @@ export class ConfigurationService {
   addQuot(quotation: Quotation)
   {
     return this.http.post<Quotation>("http://localhost:3000/quotations", quotation);
+  }
+
+  editQuot(quotation: Quotation)
+  {
+    return this.http.put<Quotation>("http://localhost:3000/quotations/"+ quotation.id.toString(), quotation);
+  }
+
+  getquotbyID(id: number)
+  {
+    return this.http.get<Quotation>("http://localhost:3000/quotations/" + id.toString());
   }
 
 

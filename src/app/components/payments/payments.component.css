@@ -1,0 +1,15 @@
+.all{
+    display: flex;
+    flex-direction: row;
+    height: 100vh;
+}
+.left{
+    width: 35%;
+    height: 100%;
+    background-color: #8db600;
+}
+.right{
+    width: 100%;
+    height: 100%;
+    background-color: #ffff8b;
+}

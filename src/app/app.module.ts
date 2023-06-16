@@ -17,6 +17,7 @@ import { CotizationComponent } from './components/cotization/cotization.componen
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { ParamsmenuComponent } from './components/paramsmenu/paramsmenu.component';
 import { SelectpropertiesComponent } from './components/selectproperties/selectproperties.component';
+import { PaymentsComponent } from './components/payments/payments.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,8 @@ import { SelectpropertiesComponent } from './components/selectproperties/selectp
     CotizationComponent,
     NavbarComponent,
     ParamsmenuComponent,
-    SelectpropertiesComponent
+    SelectpropertiesComponent,
+    PaymentsComponent
   ],
   imports: [
     BrowserModule,

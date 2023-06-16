@@ -1,3 +1,4 @@
+import { ConfigurationService } from 'src/app/services/configuration.service';
 import { Property } from './../../models/Property';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
@@ -6,6 +7,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Client } from 'src/app/models/Client';
 import { ClientService } from 'src/app/services/client.service';
 import { PropertyService } from 'src/app/services/property.service';
+import { config } from 'rxjs';
+import { Quotation } from 'src/app/models/Quotation';
 
 @Component({
   selector: 'app-selectproperties',
@@ -26,7 +29,8 @@ export class SelectpropertiesComponent implements OnInit {
               private clientservice: ClientService,
               private router: Router,
               private formbuilder: FormBuilder,
-              private propertyservice: PropertyService) {}
+              private propertyservice: PropertyService,
+              private configservice: ConfigurationService ) {}
   ngOnInit(): void {
     const quot = this.route.snapshot.queryParamMap.get('idquot');
     const config = this.route.snapshot.queryParamMap.get('idconfig');
@@ -37,6 +41,7 @@ export class SelectpropertiesComponent implements OnInit {
     this.iduser = Number(user);
 
     this.loadprops();
+    this.loadQuot();
   }
 
   propertieslist!: Property[];
@@ -52,10 +57,28 @@ export class SelectpropertiesComponent implements OnInit {
     );
   }
 
+  propselect?:Property;
   table(row:Property)
   {
     console.log(row.name + row.district);
+    this.propselect = row;
+
+    this.myquot.amount = this.propselect.pricedollar;
+    this.configservice.editQuot(this.myquot).subscribe({
+      next:(data) =>{
+        this.router.navigate(
+          ['/params-quotation'],
+          {
+            queryParams: { idquot: this.idquot, iduser: this.iduser, idprop: this.propselect?.id }}
+          );                         
+      }
+    }); 
   }
+
+
+
+
+
 
   districts?: string[];
   mapping(){
@@ -64,7 +87,11 @@ export class SelectpropertiesComponent implements OnInit {
     })
 
     console.log(this.districts);
+
   }
+
+
+
 
   selectedValue?: string;
   test(){
@@ -87,7 +114,19 @@ export class SelectpropertiesComponent implements OnInit {
 
 
 
+  myquot!: Quotation;
+  loadQuot(){
+    console.log(this.idquot);
 
+    if(this.idquot != undefined || this.idquot != 0){
+      this.configservice.getquotbyID(this.idquot).subscribe({
+        next:(data) =>{
+          this.myquot = data;
+        }
+      });  
+    }
+
+  }
 
   
   usernow!:Client;

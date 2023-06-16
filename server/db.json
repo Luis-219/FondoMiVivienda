@@ -157,6 +157,14 @@
       "capitalizacion": "Bimestral",
       "periodgracia": "Parcial",
       "moneda": "dolares"
+    },
+    {
+      "id": 11,
+      "idclient": 1,
+      "tasa": "nominal",
+      "capitalizacion": "Bimestral",
+      "periodgracia": "Parcial",
+      "moneda": "dolares"
     }
   ],
   "quotations": [
@@ -164,7 +172,11 @@
       "id": 1,
       "idclient": 1,
       "idconfigquot": 1,
-      "amount": 0
+      "amount": 100000,
+      "period": "4",
+      "tax": "4",
+      "fee": "4",
+      "initial": true
     },
     {
       "id": 2,
@@ -218,7 +230,18 @@
       "id": 10,
       "idclient": 1,
       "idconfigquot": 10,
-      "amount": 0
+      "amount": 53000
+    },
+    {
+      "id": 11,
+      "idclient": 1,
+      "idconfigquot": 11,
+      "amount": 53000,
+      "idprop": 0,
+      "period": "10",
+      "tax": "20",
+      "fee": "",
+      "initial": false
     }
   ]
 }
