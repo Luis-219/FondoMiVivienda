@@ -9,7 +9,7 @@ body{
 .title{
     text-transform: uppercase;
     font-weight: bold; 
-    color: #255000;
+    color:#2d2d2d;
     font-size: 25px;
     padding-bottom: 35px;
 }
@@ -23,8 +23,8 @@ form, mat-form-field{
     font-size: 20px;
 }
 button{
-    background-color: #255000;
-    color: #ffff8b;
-    padding-left: 20px;
-    padding-right: 20px;
+    background-color: #8db600;
+    color: #2d2d2d;
+    padding-left: 225px;
+    padding-right: 225px;
 }
