@@ -13,3 +13,22 @@
     height: 100%;
     background-color: #ffffff;
 }
+
+.plan{
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+}
+
+.bottom button{
+    margin: 45px;
+    margin-left: 20px;
+    background-color: #8db600;
+    color: #2d2d2d;
+    font-weight: bold;
+    text-transform: uppercase;
+    padding-left: 35px;
+    padding-top: 2.5px;
+    padding-right: 35px;
+    padding-bottom: 2.5px;
+}

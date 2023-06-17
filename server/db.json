@@ -85,6 +85,14 @@
       "capitalizacion": "Bimestral",
       "periodgracia": "Parcial",
       "moneda": "dolares"
+    },
+    {
+      "id": 4,
+      "idclient": 4,
+      "tasa": "efectiva",
+      "capitalizacion": "Mensual",
+      "periodgracia": "Total",
+      "moneda": "dolares"
     }
   ],
   "configquots": [
@@ -183,6 +191,30 @@
       "capitalizacion": "Mensual",
       "periodgracia": "Total",
       "moneda": "dolares"
+    },
+    {
+      "id": 13,
+      "idclient": 4,
+      "tasa": "efectiva",
+      "capitalizacion": "Mensual",
+      "periodgracia": "Total",
+      "moneda": "dolares"
+    },
+    {
+      "id": 14,
+      "idclient": 4,
+      "tasa": "efectiva",
+      "capitalizacion": "Mensual",
+      "periodgracia": "Total",
+      "moneda": "dolares"
+    },
+    {
+      "id": 15,
+      "idclient": 4,
+      "tasa": "efectiva",
+      "capitalizacion": "Anual",
+      "periodgracia": "Total",
+      "moneda": "dolares"
     }
   ],
   "quotations": [
@@ -271,6 +303,39 @@
       "tax": 0,
       "fee": 0,
       "initial": false
+    },
+    {
+      "id": 13,
+      "idclient": 4,
+      "idconfigquot": 13,
+      "amount": 100000,
+      "idprop": 0,
+      "period": "10",
+      "tax": "8",
+      "fee": "8",
+      "initial": true
+    },
+    {
+      "id": 14,
+      "idclient": 4,
+      "idconfigquot": 14,
+      "amount": 53000,
+      "idprop": 0,
+      "period": "10",
+      "tax": "10",
+      "fee": "10",
+      "initial": true
+    },
+    {
+      "id": 15,
+      "idclient": 4,
+      "idconfigquot": 15,
+      "amount": 100000,
+      "idprop": 0,
+      "period": "10",
+      "tax": "8",
+      "fee": "8",
+      "initial": true
     }
   ]
 }
