@@ -1,19 +1,44 @@
 <body>
     <div class="all">
         <div class="left">
-            <app-navbar [id] = 'iduser' [mode] = '2'></app-navbar>
+            <app-navbar [id]='iduser' [mode]='2'></app-navbar>
         </div>
+
         <div class="right">
-            <h2>Plan de pagos</h2>
 
-            <div class="plan" *ngFor="let uno of pago">
-                <h3>{{uno.periodo}}</h3>
-                <h3>{{uno.saldo}}</h3>
-                <h3>{{uno.interes}}</h3>
-                <h3>{{uno.amortizacion}}</h3>
+            <h1>SU COATIZACION</h1>
+            <!--<h3>Fecha: {{fecha}}</h3>
+            <h3>Tasa: {{tasa | number:'1.2-2'}} %</h3>
+            <h3>Periodo: {{periodo}} meses</h3>
+            <h3>Préstamo: S/ {{monto | number:'1.2-2'}}</h3>-->
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>PERIODO</th>
+                        <th>CUOTA</th>
+                        <th>INTERES</th>
+                        <th>SEG. DESGRAVAMEN</th>
+                        <th>AMORTIZACION</th>
+                        <th>DEUDA PENDIENTE</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let uno of pago">
+                        <td> {{ uno.periodo }}</td>
+                        <td>$ {{ uno.cuota | number:'1.2-2'}}</td>
+                        <td>$ {{ uno.interes | number:'1.2-2'}}</td>
+                        <td>S/ {{ uno.monto_seguro| number:'1.2-2'}}</td>
+                        <td>$ {{ uno.amortizacion | number:'1.2-2'}}</td>
+                        <td>$ {{ uno.saldo | number:'1.2-2'}}</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="actions">
+                <button mat-raised-button (click)="regresar()">Atrás</button>
             </div>
-
-
         </div>
+
     </div>
 </body>

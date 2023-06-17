@@ -27,12 +27,12 @@ export class CotizationComponent implements OnInit {
 
 
   constructor(private clientservice: ClientService,
-              private activatedRouter:ActivatedRoute,
-              private route: Router,
-              private formBuilder:FormBuilder,
-              private snackBar: MatSnackBar,
-              private configservice: ConfigurationService,
-              private router:Router) { }
+    private activatedRouter: ActivatedRoute,
+    private route: Router,
+    private formBuilder: FormBuilder,
+    private snackBar: MatSnackBar,
+    private configservice: ConfigurationService,
+    private router: Router) { }
 
   ngOnInit(): void {
     const iduser = this.activatedRouter.snapshot.queryParamMap.get('iduser');
@@ -44,7 +44,7 @@ export class CotizationComponent implements OnInit {
   }
 
 
-  loadform(){
+  loadform() {
     this.myForm = this.formBuilder.group({
       capital: ["", [Validators.required]],
       gracia: ["", [Validators.required]]
@@ -52,14 +52,14 @@ export class CotizationComponent implements OnInit {
   }
 
   tipotasa!: string;
-  checkradio(event: any){
+  checkradio(event: any) {
     console.log(event.value);
     this.tipotasa = event.value;
     console.log(this.tipotasa);
   }
 
   moneda!: string;
-  checkmoneda(event: any){
+  checkmoneda(event: any) {
     console.log(event.value);
     this.moneda = event.value;
     console.log(this.moneda);
@@ -67,9 +67,9 @@ export class CotizationComponent implements OnInit {
 
 
   exist!: Configfav[];
-  loadconfig(){
+  loadconfig() {
     this.configservice.getconfigbyid(this.usernow.id).subscribe({
-      next:(data)=>{
+      next: (data) => {
         this.exist = data;
         console.log(this.exist);
         console.log(this.exist.length)
@@ -79,44 +79,47 @@ export class CotizationComponent implements OnInit {
 
 
 
-  save(){
+  save() {
 
-    const configfav:Configfav = {
-      id:0,
+    const configfav: Configfav = {
+      id: 0,
       idclient: this.usernow.id,
       tasa: this.tipotasa,
       capitalizacion: this.myForm.get('capital')!.value,
       periodgracia: this.myForm.get('gracia')!.value,
       moneda: this.moneda
     };
-    if(this.exist.length <= 0){
-      if( this.myForm.valid ){
+    if (this.exist.length <= 0) {
+      if (this.myForm.valid) {
         this.configservice.addconfig(configfav).subscribe({
-          next: (data)=>{
+          next: (data) => {
             this.snackBar.open("Se añadió la config como favorita", 'OK', {
-              duration: 2000 });
-              this.exist.push(configfav);
+              duration: 2000
+            });
+            this.exist.push(configfav);
           }
         });
-      }else{
-        this.snackBar.open("Debe completar los campos requeridos", '',{
-          duration: 3000});
+      } else {
+        this.snackBar.open("Debe completar los campos requeridos", '', {
+          duration: 3000
+        });
       }
     }
-    else{
-      this.snackBar.open("Ya tiene una configuración favorita", '',{
-        duration: 3000});
+    else {
+      this.snackBar.open("Ya tiene una configuración favorita", '', {
+        duration: 3000
+      });
       console.log(this.exist);
     }
-    
 
-    
+
+
   }
 
-  continue(){
+  continue() {
 
-    const configquot:Configquot = {
-      id:0,
+    const configquot: Configquot = {
+      id: 0,
       idclient: this.usernow.id,
       tasa: this.tipotasa,
       capitalizacion: this.myForm.get('capital')!.value,
@@ -124,20 +127,20 @@ export class CotizationComponent implements OnInit {
       moneda: this.moneda
     };
 
-    if( this.myForm.valid ){
+    if (this.myForm.valid) {
       this.configservice.addconfigquot(configquot).subscribe({
-        next: (data)=>{
+        next: (data) => {
           this.snackBar.open("Cotización generada", "OK");
           this.generateQuot(data.id);
         }
       });
-    }else{
+    } else {
       this.snackBar.open("Debe completar los campos requeridos");
     }
   }
 
-  generateQuot(idconfig: number){
-    const quotation:Quotation = {
+  generateQuot(idconfig: number) {
+    const quotation: Quotation = {
       id: 0,
       idclient: this.usernow.id,
       idconfigquot: idconfig,
@@ -150,33 +153,31 @@ export class CotizationComponent implements OnInit {
     };
 
     this.configservice.addQuot(quotation).subscribe({
-      next:(data) =>{
+      next: (data) => {
         this.router.navigate(
           ['/select-properties'],
           {
-            queryParams: { idquot: data.id, idconfig: data.idconfigquot, iduser: data.idclient}}
-          );
+            queryParams: { idquot: data.id, idconfig: data.idconfigquot, iduser: data.idclient }
+          }
+        );
       }
     });
   }
 
 
-  usernow!:Client;
-  loadUser()
-  {
+  usernow!: Client;
+  loadUser() {
     console.log(this.id);
-    if(this.id!= undefined && this.id!= 0)
-    {
+    if (this.id != undefined && this.id != 0) {
       this.clientservice.getClientByID(this.id).subscribe(
-        (data:Client)=>{
+        (data: Client) => {
           this.usernow = data;
           console.log("name: " + this.usernow.name);
           this.loadconfig();
         }
       );
     }
-    else
-    {
+    else {
       this.route.navigate(["/login"]);
     }
   }

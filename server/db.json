@@ -165,6 +165,14 @@
       "capitalizacion": "Bimestral",
       "periodgracia": "Parcial",
       "moneda": "dolares"
+    },
+    {
+      "id": 12,
+      "idclient": 1,
+      "tasa": "efectiva",
+      "capitalizacion": "Trimestral",
+      "periodgracia": "Parcial",
+      "moneda": "soles"
     }
   ],
   "quotations": [
@@ -240,6 +248,17 @@
       "idprop": 0,
       "period": "10",
       "tax": "20",
+      "fee": "",
+      "initial": false
+    },
+    {
+      "id": 12,
+      "idclient": 1,
+      "idconfigquot": 12,
+      "amount": 53000,
+      "idprop": 0,
+      "period": "20",
+      "tax": "4.3",
       "fee": "",
       "initial": false
     }

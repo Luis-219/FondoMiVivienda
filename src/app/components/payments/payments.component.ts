@@ -20,15 +20,15 @@ export class PaymentsComponent implements OnInit {
   idprop!: number;
   iduser!: number;
   constructor(private route: ActivatedRoute,
-              private clientservice:ClientService,
-              private configservice: ConfigurationService,
-              private propservice: PropertyService) { }
+    private clientservice: ClientService,
+    private configservice: ConfigurationService,
+    private propservice: PropertyService) { }
 
   ngOnInit(): void {
     const quot = this.route.snapshot.queryParamMap.get('idquot');
     const prop = this.route.snapshot.queryParamMap.get('idprop')
     const user = this.route.snapshot.queryParamMap.get('iduser');
-    
+
     this.idquot = Number(quot);
     this.iduser = Number(user);
     this.idprop = Number(prop);
@@ -38,19 +38,19 @@ export class PaymentsComponent implements OnInit {
   }
 
   pago: Payment[] = [];
-  myquot!:Quotation;
+  myquot!: Quotation;
   configquot!: Configquot;
 
-  ftest(){
+  ftest() {
 
     console.log("entra");
-    let tasa = this.myquot.tax/100;
-    let tasa_seguro = 0/100;
+    let tasa = this.myquot.tax / 100;
+    let tasa_seguro = 0 / 100;
 
     let saldopagar = this.myquot.amount;
     let montototal = this.myquot.amount;
 
-    let cuota = (montototal * (tasa + tasa_seguro))/(1 - Math.pow(1 + tasa_seguro + tasa, -this.myquot.period));
+    let cuota = (montototal * (tasa + tasa_seguro)) / (1 - Math.pow(1 + tasa_seguro + tasa, -this.myquot.period));
 
     for (let i = 0; i < this.myquot.period; i++) {
 
@@ -58,12 +58,12 @@ export class PaymentsComponent implements OnInit {
       const amortizacion = cuota - intereses - saldopagar * tasa_seguro;
 
       const nuevo_pago: Payment = {
-          monto_seguro: saldopagar * tasa_seguro,
-          saldo: saldopagar - amortizacion,
-          periodo: i + 1,
-          cuota: cuota,
-          amortizacion: amortizacion,
-          interes: intereses
+        monto_seguro: saldopagar * tasa_seguro,
+        saldo: saldopagar - amortizacion,
+        periodo: i + 1,
+        cuota: cuota,
+        amortizacion: amortizacion,
+        interes: intereses
       };
 
       console.log(nuevo_pago);
@@ -73,31 +73,24 @@ export class PaymentsComponent implements OnInit {
 
     console.log(this.pago);
   }
-  
 
-
-
-
-
-
-
-  property!:Property;
-  loadProp(){
+  property!: Property;
+  loadProp() {
     this.propservice.getpropertiesbyID(this.idprop).subscribe({
-      next:(data) =>{
+      next: (data) => {
         this.property = data;
       }
     })
   }
 
 
-  loadQuot(){
+  loadQuot() {
     this.configservice.getquotbyID(this.idquot).subscribe({
-      next: (data: Quotation) =>{
+      next: (data: Quotation) => {
         this.myquot = data;
 
         this.configservice.getconfigquotbyid(this.myquot.idconfigquot).subscribe({
-          next:(data:Configquot) =>{
+          next: (data: Configquot) => {
             this.configquot = data;
             this.ftest();
           }
@@ -106,19 +99,19 @@ export class PaymentsComponent implements OnInit {
     })
   }
 
-  usernow!:Client;
-  loadUser()
-  {
+  usernow!: Client;
+  loadUser() {
     console.log(this.iduser);
-    if(this.iduser!= undefined && this.iduser!= 0)
-    {
+    if (this.iduser != undefined && this.iduser != 0) {
       this.clientservice.getClientByID(this.iduser).subscribe(
-        (data:Client)=>{
+        (data: Client) => {
           this.usernow = data;
         }
       );
     }
   }
 
+  regresar() {
 
+  }
 }
