@@ -6,8 +6,10 @@
         <div class="right">
            <div class="top">
                 <h1 class="title">Inicio</h1>
-                <h3 class="subtitle"> N° Cotizaciones realizadas: Proximamente.</h3>
+                <h3 class="subtitle"> N° Cotizaciones realizadas: {{completequots.length}}.</h3>
                 <h3 class="subtitle">Últimas Cotizaciones: Proximamente.</h3>
+                <div class="quots">
+                </div>
            </div>
            <div class="bottom">
                 <button mat-raised-button routerLink="/new-quotation" [queryParams]= "{iduser: id}">Nueva Cotización</button>

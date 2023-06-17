@@ -1,15 +1,70 @@
 .all{
     display: flex;
     flex-direction: row;
-    height: 100vh;
+    height: 100%;
 }
 .left{
     width: 35%;
-    height: 100%;
+    height: auto;
     background-color: #8db600;
 }
 .right{
     width: 100%;
     height: 100%;
     background-color: #ffff8b;
+}
+.title{
+    padding-top: 40px;
+    padding-bottom: 20px;
+    padding-left: 50px;
+    color: #255000;
+    font-family: "Raleway", sans-serif;
+    font-weight: 800;
+    font-size: 40px;
+}
+.table{
+    padding: 0 5% 5% 5%;
+}
+table{
+    background-color: #255000;
+    width: 100%;
+    margin-top: 2.5%;
+}
+th{
+    font-size: 15px;
+    font-weight: bold;
+}
+th, td{
+    color: #ffff8b;
+    text-transform: uppercase;
+}
+td{
+    font-weight: lighter;
+
+}
+mat-paginator{
+    background-color: #255000;
+    width: 100%;
+    font-size: 15px;
+    font-weight: normal;
+    color: #ffff8b;
+    text-transform: uppercase;
+}
+.params{
+    font-size: 15px;
+    padding-top: 20px;
+    padding-left: 50px;
+    text-transform: uppercase;
+    color: #255000;
+}
+.actions{
+    padding-right: 5%;
+    margin-top: -30px;
+    display: flex;
+    flex-direction: row-reverse;
+}
+.actions button{
+    background-color: #255000;
+    color: #ffff8b;
+    padding: 0 30px 0 30px;
 }

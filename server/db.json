@@ -44,6 +44,15 @@
     {
       "id": 2,
       "name": "Los pinos",
+      "district": "Sur",
+      "address": "Primavera av.",
+      "size": "450 m2",
+      "rooms": 5,
+      "pricedollar": 100000
+    },
+    {
+      "id": 2,
+      "name": "Los pinos",
       "district": "Surco",
       "address": "Primavera av.",
       "size": "450 m2",
@@ -165,6 +174,22 @@
       "capitalizacion": "Bimestral",
       "periodgracia": "Parcial",
       "moneda": "dolares"
+    },
+    {
+      "id": 12,
+      "idclient": 1,
+      "tasa": "nominal",
+      "capitalizacion": "Trimestral",
+      "periodgracia": "Parcial",
+      "moneda": "dolares"
+    },
+    {
+      "id": 13,
+      "idclient": 1,
+      "tasa": "nominal",
+      "capitalizacion": "Bimestral",
+      "periodgracia": "Parcial",
+      "moneda": "dolares"
     }
   ],
   "quotations": [
@@ -236,12 +261,36 @@
       "id": 11,
       "idclient": 1,
       "idconfigquot": 11,
-      "amount": 53000,
+      "amount": 100000,
       "idprop": 0,
       "period": "10",
-      "tax": "20",
+      "tax": "2",
       "fee": "",
       "initial": false
+    },
+    {
+      "id": 12,
+      "idclient": 1,
+      "idconfigquot": 12,
+      "amount": 100000,
+      "idprop": 2,
+      "period": "24",
+      "tax": "5",
+      "fee": "",
+      "initial": false,
+      "final": true
+    },
+    {
+      "id": 13,
+      "idclient": 1,
+      "idconfigquot": 13,
+      "amount": 53000,
+      "idprop": 1,
+      "period": "17",
+      "tax": "10",
+      "fee": "",
+      "initial": false,
+      "final": true
     }
   ]
 }

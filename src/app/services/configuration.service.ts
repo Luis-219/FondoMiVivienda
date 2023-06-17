@@ -44,6 +44,10 @@ export class ConfigurationService {
   {
     return this.http.get<Quotation>("http://localhost:3000/quotations/" + id.toString());
   }
+  getquotbyUserID(id: number)
+  {
+    return this.http.get<Quotation[]>("http://localhost:3000/quotations/?idclient=" + id.toString()+"&final=true");
+  }
 
 
 }

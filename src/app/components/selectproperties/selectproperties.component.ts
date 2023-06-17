@@ -64,6 +64,7 @@ export class SelectpropertiesComponent implements OnInit {
     this.propselect = row;
 
     this.myquot.amount = this.propselect.pricedollar;
+    this.myquot.idprop = this.propselect.id;
     this.configservice.editQuot(this.myquot).subscribe({
       next:(data) =>{
         this.router.navigate(
@@ -80,11 +81,14 @@ export class SelectpropertiesComponent implements OnInit {
 
 
 
-  districts?: string[];
+  districts!: string[];
   mapping(){
     this.districts = this.propertieslist.map(function(element){
       return element.district;
     })
+    this.districts = this.districts.filter((valor, indice) => {
+      return this.districts.indexOf(valor) === indice;
+    });
 
     console.log(this.districts);
 

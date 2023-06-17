@@ -8,4 +8,5 @@ export interface Quotation{
     amount: number;
     fee: number;
     initial: boolean;
+    final: boolean;
 }
