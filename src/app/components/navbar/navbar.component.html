@@ -5,7 +5,7 @@
 <div class="actions">
     <button mat-raised-button routerLink="/login">Cerrar sesión</button>
     <button mat-raised-button>Configuración</button>
-    <button mat-raised-button>Mi cuenta</button>
-    <button mat-raised-button *ngIf="mode == 2">Mis cotizaciones</button>
+    <button mat-raised-button routerLink="/my-account" [queryParams]= "{iduser: id}">Mi cuenta</button>
+    <button mat-raised-button *ngIf="mode == 2" routerLink="/my-quotations" [queryParams]= "{iduser: id}">Mis cotizaciones</button>
     
 </div>

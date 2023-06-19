@@ -1,30 +1,30 @@
+import { Client } from './../../models/Client';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Route, Router } from '@angular/router';
-import { config } from 'rxjs';
-import { Client } from 'src/app/models/Client';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Property } from 'src/app/models/Property';
 import { Quotation } from 'src/app/models/Quotation';
-import { showquot } from 'src/app/models/Showquot';
 import { ClientService } from 'src/app/services/client.service';
 import { ConfigurationService } from 'src/app/services/configuration.service';
 import { PropertyService } from 'src/app/services/property.service';
 
 @Component({
-  selector: 'app-main',
-  templateUrl: './main.component.html',
-  styleUrls: ['./main.component.css']
+  selector: 'app-myquots',
+  templateUrl: './myquots.component.html',
+  styleUrls: ['./myquots.component.css']
 })
-export class MainComponent implements OnInit {
+export class MyquotsComponent implements OnInit {
+
+  id!: number;
 
   dataSource = new MatTableDataSource<Quotation>();
   displayedColumns: string[] = ["name", "period", "tax", "amount"];
 
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
 
-  id!: number;
-  data: any;
-  constructor(private clientservice: ClientService,
-              private activatedRouter:ActivatedRoute,
+  constructor(private activatedRouter: ActivatedRoute,
+              private clientservice: ClientService,
               private router: Router,
               private configservice: ConfigurationService,
               private propservice: PropertyService) { }
@@ -33,29 +33,36 @@ export class MainComponent implements OnInit {
     const iduser = this.activatedRouter.snapshot.queryParamMap.get('iduser');
     this.id = Number(iduser);
     this.loadUser();
+
+  }
+
+  usernow!:Client;
+  loadUser()
+  {
+    if(this.id!= undefined && this.id!= 0)
+    {
+      this.clientservice.getClientByID(this.id).subscribe(
+        (data:Client)=>{
+          this.usernow = data;
+          this.loadquots();
+        }
+      );
+    }
+    else
+    {
+      this.router.navigate(["/login"]);
+    }
   }
 
   completequots!:Quotation[];
-  quotsmain: Quotation[] = [];
   loadquots(){
     this.configservice.getquotbyUserID(this.id).subscribe({
       next:(data:Quotation[])=>{
         this.completequots = data;
         this.join();
-        
-        
-        
-        while(this.quotsmain.length < 2){
-          let number = Math.floor(Math.random() * data.length);
-          console.log(number);
-          if(!this.quotsmain.includes(data[number])){
-            this.quotsmain.push(data[number]);
-          }
-          console.log(this.quotsmain);
-          console.log(this.quotsmain.length);
-  
-          this.dataSource = new MatTableDataSource(this.quotsmain);
-        }
+
+        this.dataSource = new MatTableDataSource(this.completequots);
+        this.dataSource.paginator = this.paginator;
       }
     })
   }
@@ -68,7 +75,7 @@ export class MainComponent implements OnInit {
       }
     })
   }
-  
+
   prop!: Property;
   returnprop(id: number):string{
 
@@ -95,22 +102,4 @@ export class MainComponent implements OnInit {
     }) 
   }
 
-  usernow!:Client;
-  loadUser()
-  {
-    if(this.id!= undefined && this.id!= 0)
-    {
-      this.clientservice.getClientByID(this.id).subscribe(
-        (data:Client)=>{
-          this.usernow = data;
-          this.loadquots();
-        }
-      );
-    }
-    else
-    {
-      this.router.navigate(["/login"]);
-    }
-  }
-  
 }

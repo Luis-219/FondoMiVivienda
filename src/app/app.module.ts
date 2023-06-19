@@ -18,6 +18,8 @@ import { NavbarComponent } from './components/navbar/navbar.component';
 import { ParamsmenuComponent } from './components/paramsmenu/paramsmenu.component';
 import { SelectpropertiesComponent } from './components/selectproperties/selectproperties.component';
 import { PaymentsComponent } from './components/payments/payments.component';
+import { MyquotsComponent } from './components/myquots/myquots.component';
+import { MyaccountComponent } from './components/myaccount/myaccount.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +34,9 @@ import { PaymentsComponent } from './components/payments/payments.component';
     NavbarComponent,
     ParamsmenuComponent,
     SelectpropertiesComponent,
-    PaymentsComponent
+    PaymentsComponent,
+    MyquotsComponent,
+    MyaccountComponent
   ],
   imports: [
     BrowserModule,

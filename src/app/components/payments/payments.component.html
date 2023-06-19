@@ -53,7 +53,10 @@
             </div>
 
             <div class="actions">
-                <button mat-raised-button (click)="save()">Guardar y Finalizar</button>
+                <button mat-raised-button (click)="save()" *ngIf="myquot.final == false || myquot.final == undefined; else noshow">Guardar y Finalizar</button>
+                <ng-template #noshow>
+                    <button mat-raised-button (click)="back()">Finalizar</button>
+                </ng-template>
             </div>
 
         </div>

@@ -72,3 +72,31 @@
     padding-right: 35px;
     padding-bottom: 2.5px;
 }
+.table{
+    padding: 0 5% 5% 5%;
+}
+table{
+    background-color: #255000;
+    width: 100%;
+    margin-top: 2.5%;
+}
+th{
+    font-size: 15px;
+    font-weight: bold;
+}
+th, td{
+    color: #ffff8b;
+    text-transform: uppercase;
+}
+td{
+    font-weight: lighter;
+
+}
+.mat-row:hover .mat-cell {
+    background-color: #8db600;
+    color: #255000;
+    font-weight: bold;
+}
+.click{
+    cursor: pointer;
+}

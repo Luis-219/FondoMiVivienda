@@ -10,6 +10,8 @@ import { CotizationComponent } from './components/cotization/cotization.componen
 import { ParamsmenuComponent } from './components/paramsmenu/paramsmenu.component';
 import { SelectpropertiesComponent } from './components/selectproperties/selectproperties.component';
 import { PaymentsComponent } from './components/payments/payments.component';
+import { MyquotsComponent } from './components/myquots/myquots.component';
+import { MyaccountComponent } from './components/myaccount/myaccount.component';
 
 const routes: Routes = [
   {path: "", component:EmptyhomeComponent},
@@ -17,10 +19,12 @@ const routes: Routes = [
   {path: "login", component:LoginComponent},
   {path: "signin", component:SigninComponent},
   {path: "main", component:MainComponent},
+  {path: "my-account", component:MyaccountComponent},
   {path: "new-quotation", component:CotizationComponent},
   {path: "params-quotation", component:ParamsmenuComponent},
   {path: "select-properties", component:SelectpropertiesComponent},
   {path: "payments-periods", component:PaymentsComponent},
+  {path: "my-quotations", component:MyquotsComponent},
   {path: "**", component:Page404Component}
 ];
 

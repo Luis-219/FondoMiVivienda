@@ -10,6 +10,7 @@ import { PropertyService } from 'src/app/services/property.service';
 import { Payment } from 'src/app/models/Pago';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-payments',
@@ -31,7 +32,8 @@ export class PaymentsComponent implements OnInit {
               private clientservice:ClientService,
               private configservice: ConfigurationService,
               private propservice: PropertyService,
-              private router: Router) { }
+              private router: Router,
+              private location: Location) { }
 
   ngOnInit(): void {
     const quot = this.route.snapshot.queryParamMap.get('idquot');
@@ -99,6 +101,9 @@ export class PaymentsComponent implements OnInit {
     });
   }
 
+  back(){
+    this.location.back();
+  }
 
 
 

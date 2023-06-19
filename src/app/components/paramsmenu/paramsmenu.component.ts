@@ -62,7 +62,6 @@ export class ParamsmenuComponent implements OnInit {
             idprop: this.idprop
           }
         })
-
       }
     })
   }
