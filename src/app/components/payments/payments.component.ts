@@ -1,5 +1,5 @@
 import { ConfigurationService } from 'src/app/services/configuration.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Client } from 'src/app/models/Client';
 import { Configquot } from 'src/app/models/Configquot';
@@ -8,6 +8,7 @@ import { ClientService } from 'src/app/services/client.service';
 import { Property } from 'src/app/models/Property';
 import { PropertyService } from 'src/app/services/property.service';
 import { Payment } from 'src/app/models/Pago';
+import { MatTable } from '@angular/material/table';
 
 @Component({
   selector: 'app-payments',
@@ -19,6 +20,8 @@ export class PaymentsComponent implements OnInit {
   idquot !: number;
   idprop!: number;
   iduser!: number;
+  @ViewChild(MatTable)
+  table!: MatTable<any>;
   constructor(private route: ActivatedRoute,
               private clientservice:ClientService,
               private configservice: ConfigurationService,
@@ -72,13 +75,12 @@ export class PaymentsComponent implements OnInit {
     }
 
     console.log(this.pago);
+    this.table.renderRows();
   }
+
   
-
-
-
-
-
+    displayedColumns: string[] = ['periodo','saldo','interes','amortizacion'];
+    dataSource = [];
 
 
   property!:Property;

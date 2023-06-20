@@ -215,6 +215,22 @@
       "capitalizacion": "Anual",
       "periodgracia": "Total",
       "moneda": "dolares"
+    },
+    {
+      "id": 16,
+      "idclient": 4,
+      "tasa": "efectiva",
+      "capitalizacion": "Anual",
+      "periodgracia": "Total",
+      "moneda": "dolares"
+    },
+    {
+      "id": 17,
+      "idclient": 4,
+      "tasa": "efectiva",
+      "capitalizacion": "Anual",
+      "periodgracia": "Total",
+      "moneda": "dolares"
     }
   ],
   "quotations": [
@@ -330,6 +346,28 @@
       "id": 15,
       "idclient": 4,
       "idconfigquot": 15,
+      "amount": 100000,
+      "idprop": 0,
+      "period": "10",
+      "tax": "8",
+      "fee": "8",
+      "initial": true
+    },
+    {
+      "id": 16,
+      "idclient": 4,
+      "idconfigquot": 16,
+      "amount": 100000,
+      "idprop": 0,
+      "period": "10",
+      "tax": "8",
+      "fee": "8",
+      "initial": true
+    },
+    {
+      "id": 17,
+      "idclient": 4,
+      "idconfigquot": 17,
       "amount": 100000,
       "idprop": 0,
       "period": "10",

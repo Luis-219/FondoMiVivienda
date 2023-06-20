@@ -6,12 +6,34 @@
         <div class="right">
             <h2>Plan de pagos</h2>
 
-            <div class="plan" *ngFor="let uno of pago">
-                <h3>{{uno.periodo}}</h3>
-                <h3>{{uno.saldo}}</h3>
-                <h3>{{uno.interes}}</h3>
-                <h3>{{uno.amortizacion}}</h3>
-            </div>
+            <table mat-table [dataSource]="pago" class="mat-elevation-z8">
+                <ng-container matColumnDef="periodo">
+                    <th mat-header-cell *matHeaderCellDef> Periodo </th>
+                    <td mat-cell *matCellDef="let item"> {{item.periodo}} </td>
+                    
+                </ng-container>
+
+                <ng-container matColumnDef="saldo">
+                    <th mat-header-cell *matHeaderCellDef>   Saldo </th>
+                    <td mat-cell *matCellDef="let item"> {{item.saldo}} </td>
+                    
+                </ng-container>
+                
+                <ng-container matColumnDef="interes">
+                    <th mat-header-cell *matHeaderCellDef> Intereses </th>
+                    <td mat-cell *matCellDef="let item"> {{item.interes}} </td>
+                    
+                </ng-container>
+                
+                <ng-container matColumnDef="amortizacion">
+                    <th mat-header-cell *matHeaderCellDef> Amortización </th>
+                    <td mat-cell *matCellDef="let item"> {{item.amortizacion}} </td>
+                    
+                  </ng-container> 
+
+                  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                  <tr mat-row *matRowDef="let myRowData; columns: displayedColumns"></tr>              
+            </table>
 
             <div class="bottom">
                 <button mat-raised-button routerLink="/main" >Volver Inicio</button>

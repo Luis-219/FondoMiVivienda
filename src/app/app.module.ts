@@ -18,6 +18,7 @@ import { NavbarComponent } from './components/navbar/navbar.component';
 import { ParamsmenuComponent } from './components/paramsmenu/paramsmenu.component';
 import { SelectpropertiesComponent } from './components/selectproperties/selectproperties.component';
 import { PaymentsComponent } from './components/payments/payments.component';
+import { MatTableModule } from '@angular/material/table';
 
 @NgModule({
   declarations: [
@@ -41,7 +42,8 @@ import { PaymentsComponent } from './components/payments/payments.component';
     ReactiveFormsModule,
     FormsModule,
     HttpClientModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    MatTableModule
   ],
   providers: [],
   bootstrap: [AppComponent]

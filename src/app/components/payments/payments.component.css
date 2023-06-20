@@ -20,6 +20,11 @@
     gap: 10px;
 }
 
+.mat-elevation-z8{
+    padding: 5px;
+    margin-left: 100px;
+}
+
 .bottom button{
     margin: 45px;
     margin-left: 20px;
