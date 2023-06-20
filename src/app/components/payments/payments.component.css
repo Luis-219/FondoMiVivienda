@@ -14,15 +14,21 @@
     background-color: #ffffff;
 }
 
-.plan{
-    display: flex;
-    flex-direction: row;
-    gap: 10px;
+.title{
+    padding-left: 20px;
 }
 
 .mat-elevation-z8{
-    padding: 5px;
+    padding: 15px;
     margin-left: 100px;
+}
+
+.mat-header-cell{
+    text-align: center;
+}
+
+.mat-row{
+    text-align: center;
 }
 
 .bottom button{
