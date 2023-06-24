@@ -22,7 +22,6 @@ export class MainComponent implements OnInit {
 
 
   id!: number;
-  data: any;
   constructor(private clientservice: ClientService,
               private activatedRouter:ActivatedRoute,
               private router: Router,
@@ -45,14 +44,12 @@ export class MainComponent implements OnInit {
         
         
         
-        while(this.quotsmain.length < 2){
+        while(this.quotsmain.length < 2 && this.quotsmain.length > 1){
           let number = Math.floor(Math.random() * data.length);
           console.log(number);
           if(!this.quotsmain.includes(data[number])){
             this.quotsmain.push(data[number]);
           }
-          console.log(this.quotsmain);
-          console.log(this.quotsmain.length);
   
           this.dataSource = new MatTableDataSource(this.quotsmain);
         }
@@ -75,7 +72,6 @@ export class MainComponent implements OnInit {
     this.props.forEach((find: Property) =>{
       if(find.id == id){
         this.prop = find;
-        console.log(this.prop);
       }
     })
 

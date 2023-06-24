@@ -1,3 +1,4 @@
+import { Capit } from './../../models/Cap';
 import { Configfav } from './../../models/Configfav';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
@@ -8,6 +9,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { ConfigurationService } from 'src/app/services/configuration.service';
 import { Configquot } from 'src/app/models/Configquot';
 import { Quotation } from 'src/app/models/Quotation';
+import { SoporteService } from 'src/app/services/soporte.service';
 
 @Component({
   selector: 'app-cotization',
@@ -21,7 +23,20 @@ export class CotizationComponent implements OnInit {
   myForm!: FormGroup;
 
 
-  caps = ["Mensual", "Bimestral", "Trimestral", "Cuatrimestral", "Semestral", "Anual"];
+  //caps = ["Diario", "Quincenal","Mensual", "Bimestral", "Trimestral", "Cuatrimestral", "Semestral", "Anual"];
+
+  capits!: Capit[];
+  loadcaps(){
+    this.soporte.getcaps().subscribe({
+      next: (data) =>{
+        this.capits = data;
+      }
+    })
+
+  }
+  
+
+
   gracias = ["Total", "Parcial"];
 
 
@@ -32,7 +47,8 @@ export class CotizationComponent implements OnInit {
               private formBuilder:FormBuilder,
               private snackBar: MatSnackBar,
               private configservice: ConfigurationService,
-              private router:Router) { }
+              private router:Router,
+              private soporte: SoporteService) { }
 
   ngOnInit(): void {
     const iduser = this.activatedRouter.snapshot.queryParamMap.get('iduser');
@@ -41,12 +57,13 @@ export class CotizationComponent implements OnInit {
     console.log(this.id);
     this.loadUser();
     this.loadform();
+    this.loadcaps();
   }
 
 
   loadform(){
     this.myForm = this.formBuilder.group({
-      capital: ["", [Validators.required]],
+      capital: ["", []],
       gracia: ["", [Validators.required]]
     })
   }
@@ -90,7 +107,7 @@ export class CotizationComponent implements OnInit {
       moneda: this.moneda
     };
     if(this.exist.length <= 0){
-      if( this.myForm.valid ){
+      if( this.myForm.valid){
         this.configservice.addconfig(configfav).subscribe({
           next: (data)=>{
             this.snackBar.open("Se añadió la config como favorita", 'OK', {
@@ -147,7 +164,8 @@ export class CotizationComponent implements OnInit {
       tax: 0,
       fee: 0,
       initial: false,
-      final: false
+      final: false,
+      frecuency: ''
     };
 
     this.configservice.addQuot(quotation).subscribe({

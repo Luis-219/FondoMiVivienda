@@ -11,6 +11,9 @@ import { Payment } from 'src/app/models/Pago';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { Location } from '@angular/common';
+import { SoporteService } from 'src/app/services/soporte.service';
+import { Capit } from 'src/app/models/Cap';
+import { of } from 'rxjs';
 
 @Component({
   selector: 'app-payments',
@@ -33,7 +36,8 @@ export class PaymentsComponent implements OnInit {
               private configservice: ConfigurationService,
               private propservice: PropertyService,
               private router: Router,
-              private location: Location) { }
+              private location: Location,
+              private soporte: SoporteService ) { }
 
   ngOnInit(): void {
     const quot = this.route.snapshot.queryParamMap.get('idquot');
@@ -46,25 +50,95 @@ export class PaymentsComponent implements OnInit {
     this.loadUser();
     this.loadQuot();
     this.loadProp();
+    this.loadcap();
   }
 
   pago: Payment[] = [];
   myquot!:Quotation;
   configquot!: Configquot;
+  perfrec!: number;
 
+  npagos(frec: string){
+
+    switch(frec) { 
+      case 'Mensual': {
+        this.perfrec = 12;
+        break;
+      }
+      case 'Bimestral': {
+        this.perfrec = 6;
+        break;
+      }
+      case 'Trimestral': {
+        this.perfrec = 4;
+        break;
+      }
+      case 'Cuatrimestral': {
+        this.perfrec = 3;
+        break;
+      }
+      case 'Semestral': {
+        this.perfrec = 2;
+        break;
+      }
+      default: { 
+        this.perfrec = 1;
+        break; 
+      } 
+   }
+   return this.perfrec;
+  }
+
+  caps!: Capit[];
+  loadcap(){
+    this.soporte.getcaps().subscribe({
+      next: (data) =>{
+        this.caps = data;
+      }
+    })
+  }
+
+  tasa !: number;
+  tasashow!: number;
+  capn !: number;
   paymenttable() {
 
-    let tasa = this.myquot.tax / 100;
+    this.tasa = this.myquot.tax / 100;
+    this.tasashow = this.myquot.tax / 100;
+
+    this.caps.forEach((cap: Capit) =>{
+      if(cap.cap == this.configquot.capitalizacion){
+        this.capn = cap.dias;
+      }
+    });
+    console.log(this.capn);
+
+    if(this.configquot.tasa == 'nominal'){
+      let n = this.npagos(this.myquot.frecuency);
+
+      this.tasa = (1+this.tasa/(360/(this.capn)))^n-1;
+
+      console.log(this.tasa);
+      //=(1+10%/60)^360-1
+    }
+
+    //Efectiva anual A Efectiva solic = (1+tasa)^(1/frecuencia)-1
+
+    this.tasa = Math.pow((1+this.tasa),(1/this.npagos(this.myquot.frecuency)))-1;
+    this.tasashow = this.tasa*100;
+
+
+    let plazo = this.myquot.period * this.npagos(this.myquot.frecuency);
     let tasa_seguro = 0 / 100;
 
     let saldopagar = this.myquot.amount;
     let montototal = this.myquot.amount;
 
-    let cuota = (montototal * (tasa + tasa_seguro)) / (1 - Math.pow(1 + tasa_seguro + tasa, -this.myquot.period));
+    let cuota = (montototal * (this.tasa + tasa_seguro)) / (1 - Math.pow(1 + tasa_seguro + this.tasa, -plazo));
 
-    for (let i = 0; i < this.myquot.period; i++) {
+    for (let i = 0; i < plazo; i++) {
 
-      const intereses = saldopagar * tasa;
+      const intereses = saldopagar * this.tasa;
       const amortizacion = cuota - intereses - saldopagar * tasa_seguro;
 
       const nuevo_pago: Payment = {

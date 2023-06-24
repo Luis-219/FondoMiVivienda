@@ -4,6 +4,7 @@ export interface Quotation{
     idconfigquot: number;
     idprop: number;
     period: number;
+    frecuency: string;
     tax: number;
     amount: number;
     fee: number;

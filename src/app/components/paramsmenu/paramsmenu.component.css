@@ -54,3 +54,7 @@ mat-checkbox{
     background-color: #255000;
     color: #ffff8b;
 }
+.display{
+    display: flex;
+    flex-direction: row;
+}   

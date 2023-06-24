@@ -24,6 +24,9 @@ export class ParamsmenuComponent implements OnInit {
 
   myForm!: FormGroup;
 
+  frecuency = ["Mensual", "Bimestral", "Trimestral", "Cuatrimestral", "Semestral", "Anual"];
+  gracias = ["Total", "Parcial"];
+
 
   constructor(private route: ActivatedRoute,
               private clientservice: ClientService,
@@ -50,6 +53,7 @@ export class ParamsmenuComponent implements OnInit {
     this.myquot.period = this.myForm.get('period')?.value;
     this.myquot.tax = this.myForm.get('tax')?.value;
     this.myquot.fee = this.myForm.get('fee')?.value;
+    this.myquot.frecuency = this.myForm.get('frec')?.value;
     this.myquot.initial = this.inicial;
 
     this.configservice.editQuot(this.myquot).subscribe({
@@ -99,7 +103,8 @@ export class ParamsmenuComponent implements OnInit {
       {
         period:[""],
         tax: [""],
-        fee: [""]
+        fee: [""],
+        frec: [""]
       }
     )
   }
