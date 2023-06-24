@@ -1,8 +1,8 @@
+import { Configquot } from './../../models/Configquot';
 import { ConfigurationService } from 'src/app/services/configuration.service';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Client } from 'src/app/models/Client';
-import { Configquot } from 'src/app/models/Configquot';
 import { Quotation } from 'src/app/models/Quotation';
 import { ClientService } from 'src/app/services/client.service';
 import { Property } from 'src/app/models/Property';
@@ -13,7 +13,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { Location } from '@angular/common';
 import { SoporteService } from 'src/app/services/soporte.service';
 import { Capit } from 'src/app/models/Cap';
-import { of } from 'rxjs';
+import { of, config } from 'rxjs';
 
 @Component({
   selector: 'app-payments',
@@ -89,11 +89,11 @@ export class PaymentsComponent implements OnInit {
    return this.perfrec;
   }
 
-  caps!: Capit[];
+  capi!: Capit[];
   loadcap(){
     this.soporte.getcaps().subscribe({
       next: (data) =>{
-        this.caps = data;
+        this.capi = data;
       }
     })
   }
@@ -106,19 +106,23 @@ export class PaymentsComponent implements OnInit {
     this.tasa = this.myquot.tax / 100;
     this.tasashow = this.myquot.tax / 100;
 
-    this.caps.forEach((cap: Capit) =>{
+    console.log( "capital: "  + this.configquot.capitalizacion);
+    this.capi.forEach((cap: Capit) =>{
       if(cap.cap == this.configquot.capitalizacion){
+
         this.capn = cap.dias;
       }
     });
-    console.log(this.capn);
 
     if(this.configquot.tasa == 'nominal'){
-      let n = this.npagos(this.myquot.frecuency);
-
+      let n = this.npagos(this.configquot.capitalizacion);
+      console.log(this.capn);
       this.tasa = (1+this.tasa/(360/(this.capn)))^n-1;
 
-      console.log(this.tasa);
+      console.log("M: " + (360/(this.capn)))
+      console.log("N: " + n);
+
+      console.log("tasa: " + this.tasa);
       //=(1+10%/60)^360-1
     }
 
@@ -149,16 +153,12 @@ export class PaymentsComponent implements OnInit {
         amortizacion: amortizacion,
         interes: intereses
       };
-      console.log(nuevo_pago);
       this.pago.push(nuevo_pago);
       saldopagar -= amortizacion;
-      console.log(nuevo_pago.saldo);
     }
     
     this.dataSource = new MatTableDataSource(this.pago);
     this.dataSource.paginator = this.paginator;
-
-    console.log(this.pago);
   }
   
   save(){
@@ -201,6 +201,7 @@ export class PaymentsComponent implements OnInit {
         this.configservice.getconfigquotbyid(this.myquot.idconfigquot).subscribe({
           next:(data:Configquot) =>{
             this.configquot = data;
+            console.log(this.configquot)
             this.paymenttable();
           }
         })

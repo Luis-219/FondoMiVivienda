@@ -1,5 +1,5 @@
 {
-  "caps": [
+  "Caps": [
     {
       "dias": 1,
       "cap": "Diario"
@@ -429,6 +429,106 @@
       },
       "periodgracia": "Parcial",
       "moneda": "dolares"
+    },
+    {
+      "id": 19,
+      "idclient": 1,
+      "tasa": "nominal",
+      "capitalizacion": {
+        "dias": 30,
+        "cap": "Mensual"
+      },
+      "periodgracia": "Parcial",
+      "moneda": "dolares"
+    },
+    {
+      "id": 20,
+      "idclient": 1,
+      "tasa": "nominal",
+      "capitalizacion": {
+        "dias": 30,
+        "cap": "Mensual"
+      },
+      "periodgracia": "Parcial",
+      "moneda": "dolares"
+    },
+    {
+      "id": 21,
+      "idclient": 1,
+      "tasa": "nominal",
+      "capitalizacion": {
+        "dias": 30,
+        "cap": "Mensual"
+      },
+      "periodgracia": "Parcial",
+      "moneda": "dolares"
+    },
+    {
+      "id": 22,
+      "idclient": 1,
+      "tasa": "nominal",
+      "capitalizacion": {
+        "dias": 15,
+        "cap": "Quincenal"
+      },
+      "periodgracia": "Parcial",
+      "moneda": "dolares"
+    },
+    {
+      "id": 23,
+      "idclient": 1,
+      "tasa": "nominal",
+      "capitalizacion": "Quincenal",
+      "periodgracia": "Parcial",
+      "moneda": "dolares"
+    },
+    {
+      "id": 24,
+      "idclient": 1,
+      "tasa": "nominal",
+      "capitalizacion": "Quincenal",
+      "periodgracia": "Parcial",
+      "moneda": "dolares"
+    },
+    {
+      "id": 25,
+      "idclient": 1,
+      "tasa": "nominal",
+      "capitalizacion": "Mensual",
+      "periodgracia": "Parcial",
+      "moneda": "dolares"
+    },
+    {
+      "id": 26,
+      "idclient": 1,
+      "tasa": "nominal",
+      "capitalizacion": "Mensual",
+      "periodgracia": "Parcial",
+      "moneda": "dolares"
+    },
+    {
+      "id": 27,
+      "idclient": 1,
+      "tasa": "nominal",
+      "capitalizacion": "Mensual",
+      "periodgracia": "Parcial",
+      "moneda": "dolares"
+    },
+    {
+      "id": 28,
+      "idclient": 1,
+      "tasa": "nominal",
+      "capitalizacion": "Trimestral",
+      "periodgracia": "Parcial",
+      "moneda": "dolares"
+    },
+    {
+      "id": 29,
+      "idclient": 1,
+      "tasa": "nominal",
+      "capitalizacion": "Cuatrimestral",
+      "periodgracia": "Parcial",
+      "moneda": "dolares"
     }
   ],
   "quotations": [
@@ -595,6 +695,149 @@
       "initial": false,
       "final": false,
       "frecuency": "Bimestral"
+    },
+    {
+      "id": 19,
+      "idclient": 1,
+      "idconfigquot": 19,
+      "amount": 100000,
+      "idprop": 2,
+      "period": "4",
+      "tax": "10",
+      "fee": "",
+      "initial": false,
+      "final": false,
+      "frecuency": "Semestral"
+    },
+    {
+      "id": 20,
+      "idclient": 1,
+      "idconfigquot": 20,
+      "amount": 100000,
+      "idprop": 2,
+      "period": "4",
+      "tax": "10",
+      "fee": "",
+      "initial": false,
+      "final": false,
+      "frecuency": "Semestral"
+    },
+    {
+      "id": 21,
+      "idclient": 1,
+      "idconfigquot": 21,
+      "amount": 0,
+      "idprop": 0,
+      "period": 0,
+      "tax": 0,
+      "fee": 0,
+      "initial": false,
+      "final": false,
+      "frecuency": ""
+    },
+    {
+      "id": 22,
+      "idclient": 1,
+      "idconfigquot": 22,
+      "amount": 0,
+      "idprop": 0,
+      "period": 0,
+      "tax": 0,
+      "fee": 0,
+      "initial": false,
+      "final": false,
+      "frecuency": ""
+    },
+    {
+      "id": 23,
+      "idclient": 1,
+      "idconfigquot": 23,
+      "amount": 0,
+      "idprop": 0,
+      "period": 0,
+      "tax": 0,
+      "fee": 0,
+      "initial": false,
+      "final": false,
+      "frecuency": ""
+    },
+    {
+      "id": 24,
+      "idclient": 1,
+      "idconfigquot": 24,
+      "amount": 80000,
+      "idprop": 4,
+      "period": "10",
+      "tax": "10",
+      "fee": "",
+      "initial": false,
+      "final": false,
+      "frecuency": "Bimestral"
+    },
+    {
+      "id": 25,
+      "idclient": 1,
+      "idconfigquot": 25,
+      "amount": 100000,
+      "idprop": 2,
+      "period": "4",
+      "tax": "10",
+      "fee": "",
+      "initial": false,
+      "final": false,
+      "frecuency": "Semestral"
+    },
+    {
+      "id": 26,
+      "idclient": 1,
+      "idconfigquot": 26,
+      "amount": 100000,
+      "idprop": 2,
+      "period": "4",
+      "tax": "10",
+      "fee": "",
+      "initial": false,
+      "final": false,
+      "frecuency": "Anual"
+    },
+    {
+      "id": 27,
+      "idclient": 1,
+      "idconfigquot": 27,
+      "amount": 100000,
+      "idprop": 2,
+      "period": "4",
+      "tax": "8",
+      "fee": "",
+      "initial": false,
+      "final": false,
+      "frecuency": "Semestral"
+    },
+    {
+      "id": 28,
+      "idclient": 1,
+      "idconfigquot": 28,
+      "amount": 100000,
+      "idprop": 2,
+      "period": "4",
+      "tax": "8",
+      "fee": "",
+      "initial": false,
+      "final": false,
+      "frecuency": "Semestral"
+    },
+    {
+      "id": 29,
+      "idclient": 1,
+      "idconfigquot": 29,
+      "amount": 100000,
+      "idprop": 2,
+      "period": "4",
+      "tax": "20",
+      "fee": "",
+      "initial": false,
+      "final": false,
+      "frecuency": "Semestral"
     }
   ]
 }
