@@ -5,6 +5,7 @@ export interface Quotation{
     idprop: number;
     period: number;
     frecuency: string;
+    gracia: number;
     tax: number;
     amount: number;
     fee: number;

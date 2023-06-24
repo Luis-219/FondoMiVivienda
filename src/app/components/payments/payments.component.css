@@ -51,11 +51,17 @@ mat-paginator{
     text-transform: uppercase;
 }
 .params{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;  
     font-size: 15px;
     padding-top: 20px;
     padding-left: 50px;
     text-transform: uppercase;
     color: #255000;
+}
+.div{
+    margin-right: 10%;
 }
 .actions{
     padding-right: 5%;

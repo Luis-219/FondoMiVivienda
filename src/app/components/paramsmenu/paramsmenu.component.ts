@@ -54,7 +54,10 @@ export class ParamsmenuComponent implements OnInit {
     this.myquot.tax = this.myForm.get('tax')?.value;
     this.myquot.fee = this.myForm.get('fee')?.value;
     this.myquot.frecuency = this.myForm.get('frec')?.value;
+    this.myquot.gracia = this.myForm.get('gracia')?.value;
     this.myquot.initial = this.inicial;
+
+    console.log(this.myquot.gracia);
 
     this.configservice.editQuot(this.myquot).subscribe({
       next:(data)=>{
@@ -104,7 +107,8 @@ export class ParamsmenuComponent implements OnInit {
         period:[""],
         tax: [""],
         fee: [""],
-        frec: [""]
+        frec: [""],
+        gracia: [""]
       }
     )
   }

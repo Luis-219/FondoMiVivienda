@@ -6,9 +6,16 @@
         <div class="right">
             <div class="title"> Plan de Pagos </div>
             <section class="params">
-                <p>Monto: {{myquot.amount}} dólares </p>
-                <p>Tasa: {{tasashow | number:'1.2-2'}}% </p>
-                <p>Periodos: {{myquot.period}} meses </p>
+                <div class="div">
+                    <p>Monto: {{myquot.amount}} dólares </p>
+                    <p>Tasa: {{tasashow | number:'1.2-2'}}% </p>
+                    <p>Periodos: {{myquot.period}} Años</p>
+                </div>
+                <div class="div">
+                    <p>Frencuencia: {{this.myquot.frecuency}}</p>
+                    <p>Cuota Inicial: {{this.initialfee}}</p>
+                    <p>Monto total a pagar: {{this.inmonto}}</p>
+                </div>
             </section>
             <div class="table">
                 <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">

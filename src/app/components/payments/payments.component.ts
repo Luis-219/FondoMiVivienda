@@ -18,32 +18,40 @@ import { of, config } from 'rxjs';
 @Component({
   selector: 'app-payments',
   templateUrl: './payments.component.html',
-  styleUrls: ['./payments.component.css']
+  styleUrls: ['./payments.component.css'],
 })
 export class PaymentsComponent implements OnInit {
-
-  idquot !: number;
+  idquot!: number;
   idprop!: number;
   iduser!: number;
 
   dataSource = new MatTableDataSource<Payment>();
-  displayedColumns: string[] = ["periodo", "cuota","monto_seguro", "amortizacion", "interes","saldo"];
+  displayedColumns: string[] = [
+    'periodo',
+    'cuota',
+    'monto_seguro',
+    'amortizacion',
+    'interes',
+    'saldo',
+  ];
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
-  constructor(private route: ActivatedRoute,
-              private clientservice:ClientService,
-              private configservice: ConfigurationService,
-              private propservice: PropertyService,
-              private router: Router,
-              private location: Location,
-              private soporte: SoporteService ) { }
+  constructor(
+    private route: ActivatedRoute,
+    private clientservice: ClientService,
+    private configservice: ConfigurationService,
+    private propservice: PropertyService,
+    private router: Router,
+    private location: Location,
+    private soporte: SoporteService
+  ) {}
 
   ngOnInit(): void {
     const quot = this.route.snapshot.queryParamMap.get('idquot');
-    const prop = this.route.snapshot.queryParamMap.get('idprop')
+    const prop = this.route.snapshot.queryParamMap.get('idprop');
     const user = this.route.snapshot.queryParamMap.get('iduser');
-    
+
     this.idquot = Number(quot);
     this.iduser = Number(user);
     this.idprop = Number(prop);
@@ -54,13 +62,12 @@ export class PaymentsComponent implements OnInit {
   }
 
   pago: Payment[] = [];
-  myquot!:Quotation;
+  myquot!: Quotation;
   configquot!: Configquot;
   perfrec!: number;
 
-  npagos(frec: string){
-
-    switch(frec) { 
+  npagos(frec: string) {
+    switch (frec) {
       case 'Mensual': {
         this.perfrec = 12;
         break;
@@ -81,147 +88,181 @@ export class PaymentsComponent implements OnInit {
         this.perfrec = 2;
         break;
       }
-      default: { 
+      default: {
         this.perfrec = 1;
-        break; 
-      } 
-   }
-   return this.perfrec;
+        break;
+      }
+    }
+    return this.perfrec;
   }
 
   capi!: Capit[];
-  loadcap(){
+  loadcap() {
     this.soporte.getcaps().subscribe({
-      next: (data) =>{
+      next: (data) => {
         this.capi = data;
-      }
-    })
+      },
+    });
   }
 
-  tasa !: number;
+  tasa!: number;
   tasashow!: number;
-  capn !: number;
+  capn!: number;
+  plazos!: number;
+  initialfee!: number;
+  inmonto!: number;
   paymenttable() {
-
     this.tasa = this.myquot.tax / 100;
     this.tasashow = this.myquot.tax / 100;
 
-    console.log( "capital: "  + this.configquot.capitalizacion);
-    this.capi.forEach((cap: Capit) =>{
-      if(cap.cap == this.configquot.capitalizacion){
-
+    console.log('capital: ' + this.configquot.capitalizacion);
+    this.capi.forEach((cap: Capit) => {
+      if (cap.cap == this.configquot.capitalizacion) {
         this.capn = cap.dias;
       }
     });
 
-    if(this.configquot.tasa == 'nominal'){
+    if (this.configquot.tasa == 'nominal') {
       let n = this.npagos(this.configquot.capitalizacion);
       console.log(this.capn);
-      this.tasa = (1+this.tasa/(360/(this.capn)))^n-1;
+      this.tasa = Math.pow(1 + this.tasa / (360 / this.capn), n) - 1;
 
-      console.log("M: " + (360/(this.capn)))
-      console.log("N: " + n);
+      console.log('M: ' + 360 / this.capn);
+      console.log('N: ' + n);
 
-      console.log("tasa: " + this.tasa);
+      console.log('tasa: ' + this.tasa);
       //=(1+10%/60)^360-1
     }
 
     //Efectiva anual A Efectiva solic = (1+tasa)^(1/frecuencia)-1
 
-    this.tasa = Math.pow((1+this.tasa),(1/this.npagos(this.myquot.frecuency)))-1;
-    this.tasashow = this.tasa*100;
+    this.tasa =
+      Math.pow(1 + this.tasa, 1 / this.npagos(this.myquot.frecuency)) - 1;
+    this.tasashow = this.tasa * 100;
 
-
+    this.plazos = this.myquot.period * this.npagos(this.myquot.frecuency);
     let plazo = this.myquot.period * this.npagos(this.myquot.frecuency);
     let tasa_seguro = 0 / 100;
 
-    let saldopagar = this.myquot.amount;
-    let montototal = this.myquot.amount;
+    let saldopagar = this.myquot.amount * (1 - this.myquot.fee / 100);
+    let montototal = this.myquot.amount * (1 - this.myquot.fee / 100);
+    this.inmonto = this.myquot.amount * (1 - this.myquot.fee / 100);
+    this.initialfee = this.myquot.amount * (this.myquot.fee / 100);
 
-    let cuota = (montototal * (this.tasa + tasa_seguro)) / (1 - Math.pow(1 + tasa_seguro + this.tasa, -plazo));
+    let cuota = (montototal * (this.tasa + tasa_seguro)) /
+    (1 - Math.pow(1 + tasa_seguro + this.tasa, -plazo));
+      console.log(cuota);
+    let cuotasave = (montototal * (this.tasa + tasa_seguro)) /
+    (1 - Math.pow(1 + tasa_seguro + this.tasa, -plazo));
+      console.log(cuota);
 
-    for (let i = 0; i < plazo; i++) {
+    if(this.myquot.gracia != undefined){
+      cuota = (montototal * (this.tasa + tasa_seguro)) /
+      (1 - Math.pow(1 + tasa_seguro + this.tasa, -(plazo - this.myquot.gracia)));
+      cuotasave = (montototal * (this.tasa + tasa_seguro)) /
+      (1 - Math.pow(1 + tasa_seguro + this.tasa, -(plazo - this.myquot.gracia)));
+    }
 
-      const intereses = saldopagar * this.tasa;
-      const amortizacion = cuota - intereses - saldopagar * tasa_seguro;
+    for (let i = 1; i <= plazo; i++) {
+
+      let intereses = saldopagar * this.tasa;
+      
+      let amortizacion = cuota - intereses - saldopagar * tasa_seguro;
+      cuota = cuotasave;
+
+      if(this.configquot.periodgracia == 'Total' && i <= this.myquot.gracia && this.myquot.gracia != undefined){
+        console.log( "total" + i);
+        saldopagar += intereses;
+        montototal += intereses;
+        intereses = 0;
+        amortizacion = 0;
+        cuota = 0;
+      }else{
+        if(i <= this.myquot.gracia && this.myquot.gracia != undefined && this.configquot.periodgracia == 'Parcial') {
+          console.log( "total" + i);
+          amortizacion = 0;
+          cuota = intereses;
+        }
+        else{
+          intereses = montototal * this.tasa;
+          cuota = (saldopagar * (this.tasa + tasa_seguro)) /
+          (1 - Math.pow(1 + tasa_seguro + this.tasa, -(plazo - this.myquot.gracia)));
+          amortizacion = cuota - intereses - saldopagar * tasa_seguro;
+        }
+      }
+      
+
 
       const nuevo_pago: Payment = {
         monto_seguro: saldopagar * tasa_seguro,
         saldo: saldopagar - amortizacion,
-        periodo: i + 1,
+        periodo: i,
         cuota: cuota,
         amortizacion: amortizacion,
-        interes: intereses
+        interes: intereses,
       };
       this.pago.push(nuevo_pago);
       saldopagar -= amortizacion;
     }
-    
+
     this.dataSource = new MatTableDataSource(this.pago);
     this.dataSource.paginator = this.paginator;
   }
-  
-  save(){
+
+  save() {
     this.myquot.final = true;
     this.configservice.editQuot(this.myquot).subscribe({
-      next:(data) =>{
+      next: (data) => {
         console.log(this.myquot);
-        this.router.navigate(["main"], {
-          queryParams:{
-            iduser: this.iduser
-          }
-        })
-      }
+        this.router.navigate(['main'], {
+          queryParams: {
+            iduser: this.iduser,
+          },
+        });
+      },
     });
   }
 
-  back(){
+  back() {
     this.location.back();
   }
 
-
-
-
-
-  property!:Property;
-  loadProp(){
+  property!: Property;
+  loadProp() {
     this.propservice.getpropertiesbyID(this.idprop).subscribe({
-      next:(data) =>{
+      next: (data) => {
         this.property = data;
-      }
-    })
+      },
+    });
   }
 
-
-  loadQuot(){
+  loadQuot() {
     this.configservice.getquotbyID(this.idquot).subscribe({
-      next: (data: Quotation) =>{
+      next: (data: Quotation) => {
         this.myquot = data;
 
-        this.configservice.getconfigquotbyid(this.myquot.idconfigquot).subscribe({
-          next:(data:Configquot) =>{
-            this.configquot = data;
-            console.log(this.configquot)
-            this.paymenttable();
-          }
-        })
-      }
-    })
+        this.configservice
+          .getconfigquotbyid(this.myquot.idconfigquot)
+          .subscribe({
+            next: (data: Configquot) => {
+              this.configquot = data;
+              console.log(this.configquot);
+              this.paymenttable();
+            },
+          });
+      },
+    });
   }
 
-  usernow!:Client;
-  loadUser()
-  {
+  usernow!: Client;
+  loadUser() {
     console.log(this.iduser);
-    if(this.iduser!= undefined && this.iduser!= 0)
-    {
-      this.clientservice.getClientByID(this.iduser).subscribe(
-        (data:Client)=>{
+    if (this.iduser != undefined && this.iduser != 0) {
+      this.clientservice
+        .getClientByID(this.iduser)
+        .subscribe((data: Client) => {
           this.usernow = data;
-        }
-      );
+        });
     }
   }
-
-
 }

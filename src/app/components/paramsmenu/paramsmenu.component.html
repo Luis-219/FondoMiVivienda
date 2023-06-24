@@ -22,6 +22,11 @@
                             </mat-select>
                         </mat-form-field>
                     </div>
+
+                    <mat-form-field appearance="legacy">
+                        <mat-label>Periodo de gracia {{configquot.periodgracia}}</mat-label>
+                        <input matInput formControlName="gracia" placeholder="Gracia">
+                    </mat-form-field> <br>
                 
                     <mat-form-field appearance="legacy">
                         <mat-label>Plazo (Años)</mat-label>
@@ -37,7 +42,7 @@
 
                     <div class="initial">
                         <mat-form-field appearance="legacy" *ngIf="inicial == true">
-                            <mat-label>Cuota Inicial</mat-label>
+                            <mat-label>Cuota Inicial (%)</mat-label>
                             <input matInput formControlName="fee" placeholder="Cuota Inicial">
                         </mat-form-field> <br>
                         <mat-checkbox class="check" color="primary" (change)="checkInicial($event)">Cuota Inicial</mat-checkbox>
