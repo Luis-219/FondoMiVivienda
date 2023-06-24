@@ -28,6 +28,7 @@ export class PaymentsComponent implements OnInit {
   dataSource = new MatTableDataSource<Payment>();
   displayedColumns: string[] = [
     'periodo',
+    'gracia',
     'cuota',
     'monto_seguro',
     'amortizacion',
@@ -45,7 +46,7 @@ export class PaymentsComponent implements OnInit {
     private router: Router,
     private location: Location,
     private soporte: SoporteService
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     const quot = this.route.snapshot.queryParamMap.get('idquot');
@@ -122,6 +123,7 @@ export class PaymentsComponent implements OnInit {
       }
     });
 
+    //Nominal anual a Efectiva anual
     if (this.configquot.tasa == 'nominal') {
       let n = this.npagos(this.configquot.capitalizacion);
       console.log(this.capn);
@@ -134,10 +136,8 @@ export class PaymentsComponent implements OnInit {
       //=(1+10%/60)^360-1
     }
 
-    //Efectiva anual A Efectiva solic = (1+tasa)^(1/frecuencia)-1
-
-    this.tasa =
-      Math.pow(1 + this.tasa, 1 / this.npagos(this.myquot.frecuency)) - 1;
+    //Efectiva anual a Efectiva solic = (1+tasa)^(1/frecuencia)-1
+    this.tasa = Math.pow(1 + this.tasa, 1 / this.npagos(this.myquot.frecuency)) - 1;
     this.tasashow = this.tasa * 100;
 
     this.plazos = this.myquot.period * this.npagos(this.myquot.frecuency);
@@ -149,54 +149,52 @@ export class PaymentsComponent implements OnInit {
     this.inmonto = this.myquot.amount * (1 - this.myquot.fee / 100);
     this.initialfee = this.myquot.amount * (this.myquot.fee / 100);
 
-    let cuota = (montototal * (this.tasa + tasa_seguro)) /
-    (1 - Math.pow(1 + tasa_seguro + this.tasa, -plazo));
-      console.log(cuota);
-    let cuotasave = (montototal * (this.tasa + tasa_seguro)) /
-    (1 - Math.pow(1 + tasa_seguro + this.tasa, -plazo));
-      console.log(cuota);
+    /*let cuota = (montototal * (this.tasa + tasa_seguro)) / (1 - Math.pow(1 + tasa_seguro + this.tasa, -plazo));
+    console.log(cuota);
+    let cuotasave = (montototal * (this.tasa + tasa_seguro)) / (1 - Math.pow(1 + tasa_seguro + this.tasa, -plazo));
+    console.log(cuota);
 
-    if(this.myquot.gracia != undefined){
-      cuota = (montototal * (this.tasa + tasa_seguro)) /
-      (1 - Math.pow(1 + tasa_seguro + this.tasa, -(plazo - this.myquot.gracia)));
-      cuotasave = (montototal * (this.tasa + tasa_seguro)) /
-      (1 - Math.pow(1 + tasa_seguro + this.tasa, -(plazo - this.myquot.gracia)));
-    }
+    if (this.myquot.gracia != undefined) {
+      cuota = (montototal * (this.tasa + tasa_seguro)) / (1 - Math.pow(1 + tasa_seguro + this.tasa, -(plazo - this.myquot.gracia)));
+      cuotasave = (montototal * (this.tasa + tasa_seguro)) / (1 - Math.pow(1 + tasa_seguro + this.tasa, -(plazo - this.myquot.gracia)));
+    }*/
 
+    //Cálculo de pagos
     for (let i = 1; i <= plazo; i++) {
 
-      let intereses = saldopagar * this.tasa;
-      
-      let amortizacion = cuota - intereses - saldopagar * tasa_seguro;
-      cuota = cuotasave;
+      let intereses = 0
+      let cuota = 0;
+      let amortizacion = 0;
+      let per_gracia = 'Normal';
 
-      if(this.configquot.periodgracia == 'Total' && i <= this.myquot.gracia && this.myquot.gracia != undefined){
-        console.log( "total" + i);
-        saldopagar += intereses;
-        montototal += intereses;
-        intereses = 0;
-        amortizacion = 0;
-        cuota = 0;
-      }else{
-        if(i <= this.myquot.gracia && this.myquot.gracia != undefined && this.configquot.periodgracia == 'Parcial') {
-          console.log( "total" + i);
-          amortizacion = 0;
+      if (this.configquot.periodgracia == 'Total' && i <= this.myquot.gracia) {
+
+        console.log("total" + i);
+        saldopagar = saldopagar * (1 + this.tasa);
+        montototal = montototal * (1 + this.tasa);
+        per_gracia = 'Total';
+      }
+      else {
+        if (this.configquot.periodgracia == 'Parcial' && i <= this.myquot.gracia) {
+
+          console.log("total" + i);
+          intereses = this.tasa * saldopagar;
           cuota = intereses;
+          per_gracia = 'Parcial';
         }
-        else{
-          intereses = montototal * this.tasa;
-          cuota = (saldopagar * (this.tasa + tasa_seguro)) /
-          (1 - Math.pow(1 + tasa_seguro + this.tasa, -(plazo - this.myquot.gracia)));
+        else {
+
+          intereses = saldopagar * this.tasa;
+          cuota = (montototal * (this.tasa + tasa_seguro)) / (1 - Math.pow(1 + tasa_seguro + this.tasa, -(plazo - this.myquot.gracia)));
           amortizacion = cuota - intereses - saldopagar * tasa_seguro;
         }
       }
-      
-
 
       const nuevo_pago: Payment = {
         monto_seguro: saldopagar * tasa_seguro,
         saldo: saldopagar - amortizacion,
         periodo: i,
+        gracia: per_gracia,
         cuota: cuota,
         amortizacion: amortizacion,
         interes: intereses,

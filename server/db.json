@@ -721,6 +721,46 @@
       "capitalizacion": "",
       "periodgracia": "Total",
       "moneda": "dolares"
+    },
+    {
+      "id": 54,
+      "idclient": 1,
+      "tasa": "efectiva",
+      "capitalizacion": "",
+      "periodgracia": "Total",
+      "moneda": "dolares"
+    },
+    {
+      "id": 55,
+      "idclient": 1,
+      "tasa": "efectiva",
+      "capitalizacion": "",
+      "periodgracia": "Parcial",
+      "moneda": "dolares"
+    },
+    {
+      "id": 56,
+      "idclient": 1,
+      "tasa": "efectiva",
+      "capitalizacion": "",
+      "periodgracia": "Parcial",
+      "moneda": "dolares"
+    },
+    {
+      "id": 57,
+      "idclient": 1,
+      "tasa": "efectiva",
+      "capitalizacion": "",
+      "periodgracia": "Total",
+      "moneda": "dolares"
+    },
+    {
+      "id": 58,
+      "idclient": 1,
+      "tasa": "efectiva",
+      "capitalizacion": "",
+      "periodgracia": "Parcial",
+      "moneda": "dolares"
     }
   ],
   "quotations": [
@@ -1353,6 +1393,76 @@
       "final": true,
       "gracia": "2",
       "frecuency": "Mensual"
+    },
+    {
+      "id": 54,
+      "idclient": 1,
+      "idconfigquot": 54,
+      "amount": 100000,
+      "idprop": 3,
+      "period": "4",
+      "tax": "9",
+      "fee": "",
+      "initial": false,
+      "final": true,
+      "gracia": "2",
+      "frecuency": "Semestral"
+    },
+    {
+      "id": 55,
+      "idclient": 1,
+      "idconfigquot": 55,
+      "amount": 80000,
+      "idprop": 4,
+      "period": "4",
+      "tax": "9",
+      "fee": "",
+      "initial": false,
+      "final": false,
+      "gracia": "2",
+      "frecuency": "Semestral"
+    },
+    {
+      "id": 56,
+      "idclient": 1,
+      "idconfigquot": 56,
+      "amount": 100000,
+      "idprop": 3,
+      "period": "2",
+      "tax": "9",
+      "fee": "",
+      "initial": false,
+      "final": false,
+      "gracia": "2",
+      "frecuency": "Bimestral"
+    },
+    {
+      "id": 57,
+      "idclient": 1,
+      "idconfigquot": 57,
+      "amount": 80000,
+      "idprop": 4,
+      "period": "2",
+      "tax": "9",
+      "fee": "",
+      "initial": false,
+      "final": true,
+      "gracia": "4",
+      "frecuency": "Bimestral"
+    },
+    {
+      "id": 58,
+      "idclient": 1,
+      "idconfigquot": 58,
+      "amount": 100000,
+      "idprop": 3,
+      "period": "2",
+      "tax": "9",
+      "fee": "",
+      "initial": false,
+      "final": false,
+      "gracia": "4",
+      "frecuency": "Trimestral"
     }
   ]
 }
