@@ -44,7 +44,8 @@ export class MainComponent implements OnInit {
         
         
         
-        while(this.quotsmain.length < 2 && this.quotsmain.length > 1){
+        while(this.quotsmain.length < 1 && data.length >= 1){
+
           let number = Math.floor(Math.random() * data.length);
           console.log(number);
           if(!this.quotsmain.includes(data[number])){

@@ -189,6 +189,8 @@ export class PaymentsComponent implements OnInit {
         saldopagar = saldopagar * (1 + this.tasa);
         montototal = montototal * (1 + this.tasa);
         per_gracia = 'Total';
+        montoSeg = this.tasaDeg * saldopagar;
+        cuota = montoSeg;
       }
       //Gracia parcial
       else {
@@ -197,7 +199,7 @@ export class PaymentsComponent implements OnInit {
           console.log("total" + i);
           montoSeg = this.tasaDeg * saldopagar;
           intereses = this.tasa * saldopagar;
-          cuota = intereses;
+          cuota = intereses + montoSeg;
           per_gracia = 'Parcial';
         }
         //Sin gracia
@@ -242,9 +244,9 @@ export class PaymentsComponent implements OnInit {
     this.VAN += this.myquot.amount;
 
     if (this.VAN > 0)
-      this.sug = "Aceptar";
+      this.sug = "Aceptar cotizacion";
     else if (this.VAN < 0)
-      this.sug = "Rechazar"
+      this.sug = "Rechazar cotizacion"
     else this.sug = "XD?"
   }
 
