@@ -4,7 +4,7 @@
             <app-navbar [id]='iduser' [mode]='2'></app-navbar>
         </div>
         <div class="right">
-            <div class="title"> Plan de Pagos </div>
+            <div class="title"> PLAN DE PAGOS </div>
             <section class="params">
                 <div class="div">
                     <p>Monto: {{myquot.amount}} dólares </p>
@@ -62,25 +62,28 @@
                 <mat-paginator [pageSizeOptions]="[5]"></mat-paginator>
             </div>
 
-            <div>
-                <form>
-                    <mat-form-field>
-                        <input mat-input formControlName="VAN" matInput type="number" placeholder="Ingrese el valor de la COK">
-                    </mat-form-field>
-                    <button mat-raised-button (click)="calculate_VAN()">Calcular VAN</button>
-                </form>
-            </div>
-
-            <div *ngIf="VAN !== null">
-                EL valor de la VAN con una COK de {{ COK }} % es: {{ VAN | number:'1.2-2'}}
-            </div>
-
             <div class="actions">
                 <button mat-raised-button (click)="save()"
                     *ngIf="myquot.final == false || myquot.final == undefined; else noshow">Guardar y Finalizar</button>
                 <ng-template #noshow>
                     <button mat-raised-button (click)="back()">Finalizar</button>
                 </ng-template>
+            </div>
+
+            <div class="actions">
+                <form (ngSubmit)="calculate_VAN()" #formulario="ngForm">
+                    <mat-form-field>
+                        <input matInput type="number" name="COK" [(ngModel)]="COK"
+                            placeholder="Ingrese el valor de la COK" required>
+                    </mat-form-field>
+                    <button mat-raised-button type="submit">Calcular VAN</button>
+                </form>
+            </div>
+
+            <div class="actions">
+                <p *ngIf="VAN">El valor de la VAN con una COK de {{ COK }}% es: {{ VAN | number:'1.2-2'}}
+                    &lpar;Sugerencia:
+                    {{sug}}&#41;</p>
             </div>
 
         </div>

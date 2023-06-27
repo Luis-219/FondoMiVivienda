@@ -27,6 +27,8 @@ export class PaymentsComponent implements OnInit {
   iduser!: number;
   myForm!: FormGroup;
 
+  cok!: number;
+
   dataSource = new MatTableDataSource<Payment>();
   displayedColumns: string[] = [
     'periodo',
@@ -226,19 +228,24 @@ export class PaymentsComponent implements OnInit {
     this.dataSource.paginator = this.paginator;
   }
 
-  COK: number = 0;
-  VAN: number = 0;
-
+  COK!: number;
+  VAN!: number;
+  sug!: string;
   //Calculo de la VAN
-  calculate_VAN(): number {
+  calculate_VAN() {
 
+    this.VAN = 0;
     console.log(this.COK);
     for (let i = 0; i < this.pago.length; i++)
-      this.VAN -= this.pago[i].cuota / Math.pow(1 + this.COK, this.pago[i].periodo);
+      this.VAN -= this.pago[i].cuota / Math.pow(1 + this.COK / 100, this.pago[i].periodo);
 
     this.VAN += this.myquot.amount;
 
-    return this.VAN;
+    if (this.VAN > 0)
+      this.sug = "Aceptar";
+    else if (this.VAN < 0)
+      this.sug = "Rechazar"
+    else this.sug = "XD?"
   }
 
   save() {

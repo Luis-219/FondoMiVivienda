@@ -1,20 +1,23 @@
-.all{
+.all {
     display: flex;
     flex-direction: row;
     height: 100%;
 }
-.left{
+
+.left {
     width: 25%;
     height: auto;
     background-color: #8db600;
 }
-.right{
+
+.right {
     width: 100%;
     height: 100%;
     background-color: #ffffff;
 }
-.title{
-    padding-top: 40px;
+
+.title {
+    padding-top: 20px;
     padding-bottom: 20px;
     padding-left: 50px;
     color: #4a4a4a;
@@ -22,27 +25,34 @@
     font-weight: 800;
     font-size: 40px;
 }
-.table{
-    padding: 0 5% 5% 5%;
+
+.table {
+    padding: 0% 5% 1% 5%;
 }
-table{
+
+table {
     background-color: #255000;
     width: 100%;
     margin-top: 2.5%;
 }
-th{
+
+th {
     font-size: 15px;
     font-weight: bold;
 }
-th, td{
+
+th,
+td {
     color: #ffffff;
     text-transform: uppercase;
 }
-td{
+
+td {
     font-weight: lighter;
 
 }
-mat-paginator{
+
+mat-paginator {
     background-color: #255000;
     width: 100%;
     font-size: 15px;
@@ -50,27 +60,36 @@ mat-paginator{
     color: #ffffff;
     text-transform: uppercase;
 }
-.params{
+
+.params {
     display: flex;
     flex-direction: row;
-    justify-content: space-between;  
+    justify-content: space-between;
     font-size: 15px;
-    padding-top: 20px;
+    padding-top: 10px;
     padding-left: 50px;
     text-transform: uppercase;
     color: #4a4a4a;
 }
-.div{
+
+.div {
     margin-right: 10%;
 }
-.actions{
-    padding-right: 5%;
-    margin-top: -30px;
-    display: flex;
-    flex-direction: row-reverse;
+
+.p {
+    vertical-align: middle;
+    padding-right: 40px;
+    font-weight: bold;
 }
-.actions button{
+
+.actions {
+    display: flex;
+    justify-content: flex-end;
+    margin-right: 5%;
+}
+
+button {
     background-color: #8db600;
     color: #ffffff;
-    padding: 0 30px 0 30px;
+    margin-left: 10px;
 }
