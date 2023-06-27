@@ -35,7 +35,7 @@ th{
     font-weight: bold;
 }
 th, td{
-    color: #ffff8b;
+    color: #ffffff;
     text-transform: uppercase;
 }
 td{
@@ -55,6 +55,6 @@ mat-paginator{
     width: 100%;
     font-size: 15px;
     font-weight: normal;
-    color: #ffff8b;
+    color: #ffffff;
     text-transform: uppercase;
 }
