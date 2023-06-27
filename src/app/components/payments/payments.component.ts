@@ -14,6 +14,7 @@ import { Location } from '@angular/common';
 import { SoporteService } from 'src/app/services/soporte.service';
 import { Capit } from 'src/app/models/Cap';
 import { of, config } from 'rxjs';
+import { FormBuilder, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-payments',
@@ -24,6 +25,7 @@ export class PaymentsComponent implements OnInit {
   idquot!: number;
   idprop!: number;
   iduser!: number;
+  myForm!: FormGroup;
 
   dataSource = new MatTableDataSource<Payment>();
   displayedColumns: string[] = [
@@ -45,7 +47,8 @@ export class PaymentsComponent implements OnInit {
     private propservice: PropertyService,
     private router: Router,
     private location: Location,
-    private soporte: SoporteService
+    private soporte: SoporteService,
+    private formbuilder: FormBuilder
   ) { }
 
   ngOnInit(): void {
@@ -60,9 +63,11 @@ export class PaymentsComponent implements OnInit {
     this.loadQuot();
     this.loadProp();
     this.loadcap();
+    this.loadform();
   }
 
   pago: Payment[] = [];
+  arr_pagos: Payment[] = [];
   myquot!: Quotation;
   configquot!: Configquot;
   perfrec!: number;
@@ -107,7 +112,7 @@ export class PaymentsComponent implements OnInit {
   }
 
   tasa!: number;
-  tasaDeg!:number;
+  tasaDeg!: number;
   tasashow!: number;
   tasaDegshow!: number;
   capn!: number;
@@ -119,7 +124,6 @@ export class PaymentsComponent implements OnInit {
     this.tasa = this.myquot.tax / 100;
     this.tasaDeg = this.myquot.taxdeg / 100;
     this.tasashow = this.myquot.tax / 100;
-    this.tasaDegshow = this.myquot.taxdeg / 100;
 
     console.log('capital: ' + this.configquot.capitalizacion);
     this.capi.forEach((cap: Capit) => {
@@ -134,10 +138,10 @@ export class PaymentsComponent implements OnInit {
       console.log(this.capn);
       this.tasa = Math.pow(1 + this.tasa / (360 / this.capn), n) - 1;
 
-      console.log('M: ' + 360 / this.capn);
-      console.log('N: ' + n);
 
-      console.log('tasa: ' + this.tasa);
+      //console.log('M: ' + 360 / this.capn);
+      //console.log('N: ' + n);
+      //console.log('tasa: ' + this.tasa);
       //=(1+10%/60)^360-1
     }
 
@@ -147,6 +151,7 @@ export class PaymentsComponent implements OnInit {
 
     //Tasa Degravamen anual a Efectiva solic
     this.tasaDeg = Math.pow(1 + this.tasaDeg, 1 / this.npagos(this.myquot.frecuency)) - 1;
+    this.tasaDegshow = this.tasaDeg * 100;
 
     this.plazos = this.myquot.period * this.npagos(this.myquot.frecuency);
     let plazo = this.myquot.period * this.npagos(this.myquot.frecuency);
@@ -175,6 +180,7 @@ export class PaymentsComponent implements OnInit {
       let amortizacion = 0;
       let per_gracia = 'Normal';
 
+      //Gracia total
       if (this.configquot.periodgracia == 'Total' && i <= this.myquot.gracia) {
 
         console.log("total" + i);
@@ -182,6 +188,7 @@ export class PaymentsComponent implements OnInit {
         montototal = montototal * (1 + this.tasa);
         per_gracia = 'Total';
       }
+      //Gracia parcial
       else {
         if (this.configquot.periodgracia == 'Parcial' && i <= this.myquot.gracia) {
 
@@ -191,6 +198,7 @@ export class PaymentsComponent implements OnInit {
           cuota = intereses;
           per_gracia = 'Parcial';
         }
+        //Sin gracia
         else {
 
           intereses = saldopagar * this.tasa;
@@ -214,7 +222,23 @@ export class PaymentsComponent implements OnInit {
     }
 
     this.dataSource = new MatTableDataSource(this.pago);
+    this.arr_pagos = this.pago;
     this.dataSource.paginator = this.paginator;
+  }
+
+  COK: number = 0;
+  VAN: number = 0;
+
+  //Calculo de la VAN
+  calculate_VAN(): number {
+
+    console.log(this.COK);
+    for (let i = 0; i < this.pago.length; i++)
+      this.VAN -= this.pago[i].cuota / Math.pow(1 + this.COK, this.pago[i].periodo);
+
+    this.VAN += this.myquot.amount;
+
+    return this.VAN;
   }
 
   save() {
@@ -272,5 +296,13 @@ export class PaymentsComponent implements OnInit {
           this.usernow = data;
         });
     }
+  }
+
+  loadform() {
+    this.myForm = this.formbuilder.group(
+      {
+        van: [""]
+      }
+    )
   }
 }
