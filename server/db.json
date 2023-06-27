@@ -761,6 +761,22 @@
       "capitalizacion": "",
       "periodgracia": "Parcial",
       "moneda": "dolares"
+    },
+    {
+      "id": 59,
+      "idclient": 1,
+      "tasa": "efectiva",
+      "capitalizacion": "",
+      "periodgracia": "Total",
+      "moneda": "dolares"
+    },
+    {
+      "id": 60,
+      "idclient": 1,
+      "tasa": "efectiva",
+      "capitalizacion": "",
+      "periodgracia": "Parcial",
+      "moneda": "dolares"
     }
   ],
   "quotations": [
@@ -1463,6 +1479,36 @@
       "final": false,
       "gracia": "4",
       "frecuency": "Trimestral"
+    },
+    {
+      "id": 59,
+      "idclient": 1,
+      "idconfigquot": 59,
+      "amount": 80000,
+      "idprop": 4,
+      "period": "2",
+      "tax": "8.5",
+      "fee": "",
+      "initial": false,
+      "final": true,
+      "gracia": "4",
+      "frecuency": "Bimestral",
+      "taxdeg": "2.4"
+    },
+    {
+      "id": 60,
+      "idclient": 1,
+      "idconfigquot": 60,
+      "amount": 100000,
+      "idprop": 2,
+      "period": "2",
+      "tax": "7.9",
+      "fee": "",
+      "initial": false,
+      "final": false,
+      "gracia": "3",
+      "frecuency": "Trimestral",
+      "taxdeg": "7.5"
     }
   ]
 }

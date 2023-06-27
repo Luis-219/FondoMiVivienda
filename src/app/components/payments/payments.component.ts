@@ -107,14 +107,19 @@ export class PaymentsComponent implements OnInit {
   }
 
   tasa!: number;
+  tasaDeg!:number;
   tasashow!: number;
+  tasaDegshow!: number;
   capn!: number;
   plazos!: number;
   initialfee!: number;
   inmonto!: number;
+
   paymenttable() {
     this.tasa = this.myquot.tax / 100;
+    this.tasaDeg = this.myquot.taxdeg / 100;
     this.tasashow = this.myquot.tax / 100;
+    this.tasaDegshow = this.myquot.taxdeg / 100;
 
     console.log('capital: ' + this.configquot.capitalizacion);
     this.capi.forEach((cap: Capit) => {
@@ -140,9 +145,11 @@ export class PaymentsComponent implements OnInit {
     this.tasa = Math.pow(1 + this.tasa, 1 / this.npagos(this.myquot.frecuency)) - 1;
     this.tasashow = this.tasa * 100;
 
+    //Tasa Degravamen anual a Efectiva solic
+    this.tasaDeg = Math.pow(1 + this.tasaDeg, 1 / this.npagos(this.myquot.frecuency)) - 1;
+
     this.plazos = this.myquot.period * this.npagos(this.myquot.frecuency);
     let plazo = this.myquot.period * this.npagos(this.myquot.frecuency);
-    let tasa_seguro = 0 / 100;
 
     let saldopagar = this.myquot.amount * (1 - this.myquot.fee / 100);
     let montototal = this.myquot.amount * (1 - this.myquot.fee / 100);
@@ -163,6 +170,7 @@ export class PaymentsComponent implements OnInit {
     for (let i = 1; i <= plazo; i++) {
 
       let intereses = 0
+      let montoSeg = 0;
       let cuota = 0;
       let amortizacion = 0;
       let per_gracia = 'Normal';
@@ -178,6 +186,7 @@ export class PaymentsComponent implements OnInit {
         if (this.configquot.periodgracia == 'Parcial' && i <= this.myquot.gracia) {
 
           console.log("total" + i);
+          montoSeg = this.tasaDeg * saldopagar;
           intereses = this.tasa * saldopagar;
           cuota = intereses;
           per_gracia = 'Parcial';
@@ -185,19 +194,20 @@ export class PaymentsComponent implements OnInit {
         else {
 
           intereses = saldopagar * this.tasa;
-          cuota = (montototal * (this.tasa + tasa_seguro)) / (1 - Math.pow(1 + tasa_seguro + this.tasa, -(plazo - this.myquot.gracia)));
-          amortizacion = cuota - intereses - saldopagar * tasa_seguro;
+          montoSeg = this.tasaDeg * saldopagar;
+          cuota = (montototal * (this.tasa + this.tasaDeg)) / (1 - Math.pow(1 + this.tasaDeg + this.tasa, -(plazo - this.myquot.gracia)));
+          amortizacion = cuota - intereses - saldopagar * this.tasaDeg;
         }
       }
 
       const nuevo_pago: Payment = {
-        monto_seguro: saldopagar * tasa_seguro,
         saldo: saldopagar - amortizacion,
         periodo: i,
         gracia: per_gracia,
         cuota: cuota,
         amortizacion: amortizacion,
         interes: intereses,
+        monto_seguro: montoSeg,
       };
       this.pago.push(nuevo_pago);
       saldopagar -= amortizacion;

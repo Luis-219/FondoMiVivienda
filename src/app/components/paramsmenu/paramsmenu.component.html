@@ -1,7 +1,7 @@
 <body>
     <div class="all">
         <div class="left">
-            <app-navbar [id] = "iduser" [mode] = "2"></app-navbar>
+            <app-navbar [id]="iduser" [mode]="2"></app-navbar>
         </div>
         <div class="right">
             <div class="title">Configuración de parámetros</div>
@@ -27,25 +27,29 @@
                         <mat-label>Periodo de gracia {{configquot.periodgracia}}</mat-label>
                         <input matInput formControlName="gracia" placeholder="Gracia">
                     </mat-form-field> <br>
-                
+
                     <mat-form-field appearance="legacy">
                         <mat-label>Plazo (Años)</mat-label>
                         <input matInput formControlName="period" placeholder="Periodo">
                     </mat-form-field> <br>
-    
+
                     <mat-form-field appearance="legacy">
                         <mat-label>Tasa (Anual)</mat-label>
                         <input matInput formControlName="tax" placeholder="Tasa">
                     </mat-form-field> <br>
 
-                    
+                    <mat-form-field appearance="legacy">
+                        <mat-label val>Tasa de Desgravamen</mat-label>
+                        <input matInput formControlName="taxDeg" placeholder="Tasa de desgravamen anual">
+                    </mat-form-field> <br>
 
                     <div class="initial">
                         <mat-form-field appearance="legacy" *ngIf="inicial == true">
                             <mat-label>Cuota Inicial (%)</mat-label>
                             <input matInput formControlName="fee" placeholder="Cuota Inicial">
                         </mat-form-field> <br>
-                        <mat-checkbox class="check" color="primary" (change)="checkInicial($event)">Cuota Inicial</mat-checkbox>
+                        <mat-checkbox class="check" color="primary" (change)="checkInicial($event)">Cuota
+                            Inicial</mat-checkbox>
                     </div>
                 </form>
 
@@ -57,7 +61,7 @@
                     <button mat-raised-button (click)="continue()"> Continuar </button>
                 </div>
 
-                
+
             </div>
         </div>
     </div>

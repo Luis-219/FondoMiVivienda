@@ -7,6 +7,7 @@ export interface Quotation{
     frecuency: string;
     gracia: number;
     tax: number;
+    taxdeg: number;
     amount: number;
     fee: number;
     initial: boolean;

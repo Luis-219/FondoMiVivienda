@@ -167,6 +167,7 @@ export class CotizationComponent implements OnInit {
       final: false,
       gracia: 0,
       frecuency: '',
+      taxdeg: 0
     };
 
     this.configservice.addQuot(quotation).subscribe({

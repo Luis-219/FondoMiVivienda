@@ -27,19 +27,18 @@ export class ParamsmenuComponent implements OnInit {
   frecuency = ["Mensual", "Bimestral", "Trimestral", "Cuatrimestral", "Semestral", "Anual"];
   gracias = ["Total", "Parcial"];
 
-
   constructor(private route: ActivatedRoute,
-              private clientservice: ClientService,
-              private router: Router,
-              private formbuilder: FormBuilder,
-              private propservice: PropertyService,
-              private configservice: ConfigurationService) { }
+    private clientservice: ClientService,
+    private router: Router,
+    private formbuilder: FormBuilder,
+    private propservice: PropertyService,
+    private configservice: ConfigurationService) { }
 
   ngOnInit(): void {
     const quot = this.route.snapshot.queryParamMap.get('idquot');
     const prop = this.route.snapshot.queryParamMap.get('idprop')
     const user = this.route.snapshot.queryParamMap.get('iduser');
-    
+
     this.idquot = Number(quot);
     this.iduser = Number(user);
     this.idprop = Number(prop);
@@ -49,21 +48,22 @@ export class ParamsmenuComponent implements OnInit {
     this.loadQuot()
   }
 
-  continue(){
+  continue() {
     this.myquot.period = this.myForm.get('period')?.value;
     this.myquot.tax = this.myForm.get('tax')?.value;
     this.myquot.fee = this.myForm.get('fee')?.value;
     this.myquot.frecuency = this.myForm.get('frec')?.value;
     this.myquot.gracia = this.myForm.get('gracia')?.value;
+    this.myquot.taxdeg = this.myForm.get('taxDeg')?.value;
     this.myquot.initial = this.inicial;
 
     console.log(this.myquot.gracia);
 
     this.configservice.editQuot(this.myquot).subscribe({
-      next:(data)=>{
+      next: (data) => {
 
         this.router.navigate(['payments-periods'], {
-          queryParams:{
+          queryParams: {
             iduser: this.iduser,
             idquot: this.idquot,
             idprop: this.idprop
@@ -74,24 +74,24 @@ export class ParamsmenuComponent implements OnInit {
   }
 
 
-  property!:Property;
-  loadProp(){
+  property!: Property;
+  loadProp() {
     this.propservice.getpropertiesbyID(this.idprop).subscribe({
-      next:(data) =>{
+      next: (data) => {
         this.property = data;
       }
     })
   }
 
-  myquot!:Quotation;
+  myquot!: Quotation;
   configquot!: Configquot;
-  loadQuot(){
+  loadQuot() {
     this.configservice.getquotbyID(this.idquot).subscribe({
-      next: (data: Quotation) =>{
+      next: (data: Quotation) => {
         this.myquot = data;
 
         this.configservice.getconfigquotbyid(this.myquot.idconfigquot).subscribe({
-          next:(data:Configquot) =>{
+          next: (data: Configquot) => {
             this.configquot = data;
           }
         })
@@ -99,28 +99,25 @@ export class ParamsmenuComponent implements OnInit {
     })
   }
 
-
-
-  loadform(){
+  loadform() {
     this.myForm = this.formbuilder.group(
       {
-        period:[""],
+        period: [""],
         tax: [""],
         fee: [""],
         frec: [""],
-        gracia: [""]
+        gracia: [""],
+        taxDeg: [""]
       }
     )
   }
 
-  usernow!:Client;
-  loadUser()
-  {
+  usernow!: Client;
+  loadUser() {
     console.log(this.iduser);
-    if(this.iduser!= undefined && this.iduser!= 0)
-    {
+    if (this.iduser != undefined && this.iduser != 0) {
       this.clientservice.getClientByID(this.iduser).subscribe(
-        (data:Client)=>{
+        (data: Client) => {
           this.usernow = data;
         }
       );
@@ -129,18 +126,18 @@ export class ParamsmenuComponent implements OnInit {
 
   inicial = false;
 
-  checkInicial(event: MatCheckboxChange){
+  checkInicial(event: MatCheckboxChange) {
     console.log(this.inicial);
-    if(event.checked){
+    if (event.checked) {
       this.inicial = true;
       console.log(this.inicial);
     }
-    else{
+    else {
       this.inicial = false;
       console.log(this.inicial);
     }
   }
-  
+
 
 
 }
