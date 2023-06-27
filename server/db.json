@@ -777,6 +777,14 @@
       "capitalizacion": "",
       "periodgracia": "Parcial",
       "moneda": "dolares"
+    },
+    {
+      "id": 61,
+      "idclient": 1,
+      "tasa": "efectiva",
+      "capitalizacion": "",
+      "periodgracia": "Total",
+      "moneda": "dolares"
     }
   ],
   "quotations": [
@@ -1509,6 +1517,21 @@
       "gracia": "3",
       "frecuency": "Trimestral",
       "taxdeg": "7.5"
+    },
+    {
+      "id": 61,
+      "idclient": 1,
+      "idconfigquot": 61,
+      "amount": 0,
+      "idprop": 0,
+      "period": 0,
+      "tax": 0,
+      "fee": 0,
+      "initial": false,
+      "final": false,
+      "gracia": 0,
+      "frecuency": "",
+      "taxdeg": 0
     }
   ]
 }

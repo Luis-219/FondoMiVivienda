@@ -9,7 +9,7 @@
                 <div class="div">
                     <p>Monto: {{myquot.amount}} dólares </p>
                     <p>Tasa: {{tasashow | number:'1.2-2'}}% </p>
-                    <p>Tasa de degravamen: {{tasaDegshow | number:'1.2-2'}}% </p>
+                    <p>Tasa de seguro de desgravamen: {{tasaDegshow | number:'1.2-2'}}% </p>
                     <p>Periodos: {{myquot.period}} Años</p>
                 </div>
                 <div class="div">
@@ -37,7 +37,7 @@
                     </ng-container>
 
                     <ng-container matColumnDef="monto_seguro">
-                        <th mat-header-cell *matHeaderCellDef> Monto Seguro </th>
+                        <th mat-header-cell *matHeaderCellDef> Monto Seguro Deg.</th>
                         <td mat-cell *matCellDef="let element"> {{element.monto_seguro | number:'1.2-2'}} </td>
                     </ng-container>
 
