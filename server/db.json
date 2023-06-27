@@ -63,6 +63,16 @@
       "phone": "adad",
       "dni": "adad",
       "address": "adda"
+    },
+    {
+      "id": 4,
+      "email": "cokijlmf@gmail.com",
+      "password": "123456",
+      "name": "Jorge",
+      "lastname": "Mercado",
+      "phone": "998464987",
+      "dni": "12259999",
+      "address": "Av. Primavera 2034"
     }
   ],
   "properties": [
@@ -270,6 +280,14 @@
       "tasa": "nominal",
       "capitalizacion": "Bimestral",
       "periodgracia": "Parcial",
+      "moneda": "dolares"
+    },
+    {
+      "id": 4,
+      "idclient": 4,
+      "tasa": "efectiva",
+      "capitalizacion": "",
+      "periodgracia": "Total",
       "moneda": "dolares"
     }
   ],
@@ -781,6 +799,14 @@
     {
       "id": 61,
       "idclient": 1,
+      "tasa": "efectiva",
+      "capitalizacion": "",
+      "periodgracia": "Total",
+      "moneda": "dolares"
+    },
+    {
+      "id": 62,
+      "idclient": 4,
       "tasa": "efectiva",
       "capitalizacion": "",
       "periodgracia": "Total",
@@ -1532,6 +1558,21 @@
       "gracia": 0,
       "frecuency": "",
       "taxdeg": 0
+    },
+    {
+      "id": 62,
+      "idclient": 4,
+      "idconfigquot": 62,
+      "amount": 100000,
+      "idprop": 3,
+      "period": "10",
+      "tax": "8",
+      "fee": "4",
+      "initial": true,
+      "final": true,
+      "gracia": "2",
+      "frecuency": "Anual",
+      "taxdeg": "8"
     }
   ]
 }
